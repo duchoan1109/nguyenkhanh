@@ -1,0 +1,413 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bé Yêu Của Anh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Cursor trái tim màu hồng đẹp hơn */
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="%23ff69b4" stroke="%23e91e63" stroke-width="1"/></svg>') 10 10, auto;
+}
+        .fireworks {
+        display: none;
+    }
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, 
+                rgba(248, 205, 213, 0.9) 0%,
+                rgba(255, 200, 221, 0.8) 20%,
+                rgba(255, 175, 204, 0.7) 40%,
+                rgba(252, 173, 188, 0.8) 60%,
+                rgba(248, 174, 188, 0.9) 80%,
+                rgba(255, 200, 221, 0.8) 100% 
+            ),
+            linear-gradient(45deg, 
+                rgba(255, 255, 255, 0.3) 0%,
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(255, 255, 255, 0.3) 100%
+            );
+            background-size: 400% 400%, 100% 100%;
+            animation: dreamyPinkFlow 12s ease-in-out infinite;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+        @keyframes dreamyPinkFlow {
+            0% { 
+                background-position: 0% 50%, 0% 0%;
+            }
+            50% { 
+                background-position: 100% 50%, 100% 100%;
+            }
+            100% { 
+                background-position: 0% 50%, 0% 0%;
+            }
+        }
+
+        .congratulations-container {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            animation: containerFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes containerFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.01); }
+        }
+
+        .main-message {
+            font-size: 4em;
+            font-weight: 900;
+            background: linear-gradient(45deg, #22242c, #2c292e, #202022);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: simpleGradient 3s ease-in-out infinite;
+            margin: 0 0 30px 0;
+        }
+
+        @keyframes simpleGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .sub-message {
+            font-size: 2.5em;
+            color: #fff;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            margin: 20px 0;
+            animation: textGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { 
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+                transform: scale(1);
+            }
+            to { 
+                text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+                transform: scale(1.02);
+            }
+        }
+
+        .back-home-btn {
+            background: linear-gradient(45deg, #181920, #141216);
+            border: none;
+            color: white;
+            padding: 20px 50px;
+            font-size: 1.5em;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(119, 119, 119, 0.2);
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .back-home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        .fireworks {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .firework {
+            position: absolute;
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            animation: fireworkExplode 2s ease-out infinite;
+        }
+
+        @keyframes fireworkExplode {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(10);
+                opacity: 0.6;
+            }
+            100% {
+                transform: scale(20);
+                opacity: 0;
+            }
+        }
+
+        /* CSS cho ảnh - loại bỏ shadow phức tạp */
+        .heart-images-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .heart-img-scroll {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.8); /* Viền trắng */
+            /* Shadow trắng đẹp */
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+            animation: scrollLeftToRight linear;
+            opacity: 0.9;
+        }
+
+        /* Hiệu ứng chạy đơn giản hơn */
+        @keyframes scrollLeftToRight {
+            0% {
+                transform: translateX(-190px) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: translateX(-180px) scale(1);
+            }
+            90% {
+                opacity: 1;
+                transform: translateX(calc(100vw + 50px)) scale(1);
+            }
+            100% {
+                transform: translateX(calc(100vw + 70px)) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-message {
+                font-size: 2.8em;
+            }
+            .sub-message {
+                font-size: 1.8em;
+            }
+            .heart-img-scroll {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-message {
+                font-size: 2.2em;
+            }
+            .sub-message {
+                font-size: 1.4em;
+            }
+            .heart-img-scroll {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hiệu ứng pháo hoa -->
+    <div class="fireworks" id="fireworks"></div>
+
+    <!-- Container cho ảnh trái tim chạy ngang -->
+    <div class="heart-images-container" id="heartImagesContainer"></div>
+
+
+    <script>
+        const heartImages = [
+            "img/gaixenh12.jpg", "img/gaixenh1.jpg", "img/gaixenh2.jpg", "img/gaixenh3.jpg", "img/gaixenh4.jpg","img/gaixenh5.jpg",
+            "img/gaixenh6.jpg", "img/gaixenh7.jpg", "img/gaixenh8.jpg", "img/gaixenh9.jpg","img/gaixenh10.jpg","img/gaixenh11.jpg",
+            "img/gaixenh12.jpg", "img/gaixenh1.jpg", "img/gaixenh2.jpg", "img/gaixenh3.jpg", "img/gaixenh4.jpg","img/gaixenh5.jpg",
+            "img/gaixenh6.jpg", "img/gaixenh7.jpg", "img/gaixenh8.jpg", "img/gaixenh9.jpg","img/gaixenh10.jpg","img/gaixenh11.jpg",
+            "img/gaixenh12.jpg", "img/gaixenh1.jpg", "img/gaixenh2.jpg", "img/gaixenh3.jpg", "img/gaixenh4.jpg","img/gaixenh5.jpg",
+            "img/gaixenh6.jpg", "img/gaixenh7.jpg", "img/gaixenh8.jpg", "img/gaixenh9.jpg","img/gaixenh10.jpg","img/gaixenh11.jpg"
+
+        ];
+
+        // Tạo hiệu ứng pháo hoa
+        function createFireworks() {
+            const fireworks = document.getElementById('fireworks');
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff'];
+            
+            for (let i = 0; i < 13; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement('div');
+                    firework.className = 'firework';
+                    firework.style.left = Math.random() * 100 + '%';
+                    firework.style.top = Math.random() * 100 + '%';
+                    firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    firework.style.animationDelay = Math.random() * 2 + 's';
+                    firework.style.boxShadow = `0 0 20px ${firework.style.backgroundColor}`;
+                    fireworks.appendChild(firework);
+                    
+                    setTimeout(() => {
+                        firework.remove();
+                    }, 2000);
+                }, i * 350);
+            }
+        }
+
+        // Tạo ảnh hình chữ nhật chạy ngang - THÊM MỚI
+        function createRectangleImage() {
+            const container = document.getElementById('heartImagesContainer');
+            const img = document.createElement('img');
+            
+            // Chọn ảnh ngẫu nhiên từ danh sách
+            const randomImage = heartImages[Math.floor(Math.random() * heartImages.length)];
+            img.src = randomImage;
+            img.className = 'heart-img-scroll';
+            
+            // Vị trí Y ngẫu nhiên (từ 5% đến 90% chiều cao màn hình)
+            const randomY = Math.random() * 95;
+            img.style.top = randomY + 'vh';
+            
+            // Thời gian animation ngẫu nhiên (4-7 giây)
+            const duration = 5 + Math.random() * 3;
+            img.style.animationDuration = duration + 's';
+            
+            // Shadow trắng
+            const shadowColors = [
+                'rgba(255, 255, 255, 0.4)', 
+                'rgba(255, 255, 255, 0.5)', 
+                'rgba(255, 255, 255, 0.6)',
+                'rgba(255, 255, 255, 0.3)',
+                'rgba(240, 240, 240, 0.5)'
+            ];
+            const randomShadow = shadowColors[Math.floor(Math.random() * shadowColors.length)];
+            img.style.boxShadow = `0 10px 30px ${randomShadow}`;
+            
+            const widths = [177, 170, 220, 188, 210, 240, 225,193];
+            const heights = [300,310, 150, 290, 210, 180, 380,330];
+            const sizeIndex = Math.floor(Math.random() * widths.length);
+            img.style.width = widths[sizeIndex] + 'px';
+            img.style.height = heights[sizeIndex] + 'px';
+            
+            // Cải thiện chất lượng ảnh
+            img.style.imageRendering = 'high-quality';
+            img.style.imageRendering = '-webkit-optimize-contrast';
+            img.style.imageRendering = 'crisp-edges';
+            
+            container.appendChild(img);
+            
+            // Xóa ảnh sau khi animation hoàn thành
+            setTimeout(() => {
+                if (img.parentNode) {
+                    img.remove();
+                }
+            }, duration * 1000);
+        }
+
+        // Tạo ảnh trái tim chạy ngang - 4K SIZE (HÌNH VUÔNG)
+        function createScrollingHeartImage() {
+            const container = document.getElementById('heartImagesContainer');
+            const img = document.createElement('img');
+            
+            // Chọn ảnh ngẫu nhiên từ danh sách
+            const randomImage = heartImages[Math.floor(Math.random() * heartImages.length)];
+            img.src = randomImage;
+            img.className = 'heart-img-scroll';
+            
+            // Vị trí Y ngẫu nhiên (từ 5% đến 90% chiều cao màn hình)
+            const randomY = Math.random() * 95;
+            img.style.top = randomY + 'vh';
+            
+            // Thời gian animation ngẫu nhiên (6-9 giây - CHẬM HƠN)
+            const duration = 6 + Math.random() * 3;
+            img.style.animationDuration = duration + 's';
+            
+            // Thay đổi shadow thành màu trắng
+            const shadowColors = [
+                'rgba(255, 255, 255, 0.4)', 
+                'rgba(255, 255, 255, 0.5)', 
+                'rgba(255, 255, 255, 0.6)',
+                'rgba(255, 255, 255, 0.3)',
+                'rgba(240, 240, 240, 0.5)' // Trắng hơi xám nhẹ
+            ];
+            const randomShadow = shadowColors[Math.floor(Math.random() * shadowColors.length)];
+            img.style.boxShadow = `0 9px 25px ${randomShadow}`;
+            
+            // Kích thước hình vuông
+            const sizes = [210, 240, 220, 230, 250, 210, 215, 235];
+            const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+            img.style.width = randomSize + 'px';
+            img.style.height = randomSize + 'px';
+            
+            // Cải thiện chất lượng ảnh
+            img.style.imageRendering = 'high-quality';
+            img.style.imageRendering = '-webkit-optimize-contrast';
+            img.style.imageRendering = 'crisp-edges';
+            
+            container.appendChild(img);
+            
+            // Xóa ảnh sau khi animation hoàn thành
+            setTimeout(() => {
+                if (img.parentNode) {
+                    img.remove();
+                }
+            }, duration * 1000);
+        }
+
+        // Chạy ảnh hình chữ nhật liên tục - THÊM MỚI
+        function startRectangleImages() {
+            for (let i = 0; i < 13; i++) {
+                setTimeout(() => {
+                    createRectangleImage();
+                }, i * 240);
+            }
+            setInterval(createRectangleImage, 550); // Tăng thời gian để không quá nhanh
+        }
+55
+        function startScrollingHeartImages() {
+            for (let i = 0; i < 12; i++) {
+                setTimeout(() => {
+                    createScrollingHeartImage();
+                }, i * 2570);
+            }
+            setInterval(createScrollingHeartImage, 300);
+        }
+        function startContinuousFireworks() {
+            createFireworks();
+            setInterval(createFireworks, 5000);
+        }
+        function createMultipleStreams() {
+    for (let stream = 0; stream < 3; stream++) {
+        setTimeout(() => {
+            startScrollingHeartImages();
+        }, stream * 160);
+    }
+}
+
+       
+        // Khởi tạo khi trang load - CẬP NHẬT
+        window.addEventListener('load', () => {
+            startContinuousFireworks();
+            startScrollingHeartImages(); // Ảnh hình vuông
+            startRectangleImages();      // Ảnh hình chữ nhật - THÊM MỚI
+        });
+    </script>
+</body>
+</html>

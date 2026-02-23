@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Matrix Birthday Particle - Dr.Gifter</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #000;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // --- CẤU HÌNH ---
+        const matrixChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ$+-*/=%\"'#&_(),.;:?!\\|{}<>[]^~";
+        const fontSize = 16;
+        const columns = Math.floor(canvas.width / fontSize);
+        const drops = new Array(columns).fill(1);
+
+        const particles = [];
+        const numParticles = 1500; // Số lượng hạt
+        let currentScene = 0;
+        const scenes = ["3", "2", "1"];
+        let sceneTimeout;
+
+        // --- LỚP HẠT (PARTICLE) ---
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.destX = this.x;
+                this.destY = this.y;
+                this.color = '#fff';
+                this.size = Math.random() * 2 + 1;
+                this.friction = 0.95;
+                this.ease = 0.1;
+                this.vx = 0;
+                this.vy = 0;
+            }
+
+            update() {
+                this.vx = (this.destX - this.x) * this.ease;
+                this.vy = (this.destY - this.y) * this.ease;
+                this.x += this.vx;
+                this.y += this.vy;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Khởi tạo hạt
+        for (let i = 0; i < numParticles; i++) {
+            particles.push(new Particle());
+        }
+
+        // --- HÀM LẤY TỌA ĐỘ TỪ CHỮ ---
+        function getTargetPoints(text) {
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCanvas.width = canvas.width;
+            tempCanvas.height = canvas.height;
+
+            tempCtx.fillStyle = "white";
+            tempCtx.textAlign = "center";
+            tempCtx.textBaseline = "middle";
+            // Font chữ lớn để lấy tọa độ
+            tempCtx.font = `bold ${Math.min(canvas.width/5, 200)}px Arial`;
+            tempCtx.fillText(text, canvas.width / 2, canvas.height / 2);
+
+            const imageData = tempCtx.getImageData(0, 0, canvas.width, canvas.height).data;
+            const points = [];
+            // Quét pixel (bước nhảy 4 để tăng hiệu năng)
+            for (let y = 0; y < canvas.height; y += 4) {
+                for (let x = 0; x < canvas.width; x += 4) {
+                    const index = (y * canvas.width + x) * 4;
+                    if (imageData[index] > 128) {
+                        points.push({ x, y });
+                    }
+                }
+            }
+            return points;
+        }
+
+function changeScene() {
+            // MỚI THÊM: Nếu đã đếm xong "3, 2, 1", chuyển sang index.html
+            if (currentScene >= scenes.length) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const points = getTargetPoints(scenes[currentScene]);
+            
+            // Đổi màu tùy theo scene
+            let color = "#0f0"; // Mặc định xanh Matrix
+            if(currentScene >= 3) color = "#ff00ff"; // Màu hồng cho chữ Happy
+            if(currentScene === 5) color = "#00ffff"; // Màu cyan cho Dr.Gifter
+
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+                if (i < points.length) {
+                    p.destX = points[i].x;
+                    p.destY = points[i].y;
+                    p.color = color;
+                } else {
+                    // Các hạt thừa thì bay ngẫu nhiên
+                    p.destX = Math.random() * canvas.width;
+                    p.destY = Math.random() * canvas.height;
+                    p.color = "rgba(0, 255, 0, 0.1)";
+                }
+            }
+
+            currentScene++;
+            setTimeout(changeScene, 2000); // Đổi cảnh sau 2 giây
+        }
+
+        // --- VÒNG LẶP CHÍNH ---
+        function draw() {
+            // Hiệu ứng mờ dần cho Matrix
+            ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Vẽ Matrix Rain
+            ctx.fillStyle = "#0F0";
+            ctx.font = fontSize + "px monospace";
+            for (let i = 0; i < drops.length; i++) {
+                const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+
+            // Vẽ Particles
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Bắt đầu
+        changeScene();
+        draw();
+    </script>
+</body>
+</html>

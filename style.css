@@ -1,0 +1,1432 @@
+:root {
+    --primary-pink: #ff69b4;
+    --secondary-pink: #ff1493;
+    --light-pink: #ffb6c1;
+    --white: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.15);
+    --shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+}
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            background: linear-gradient(-45deg, #f5c1d7, #e7acc9, #f5b5d0, #f8cee3);
+            background-size: 400% 400%;
+            animation: bgmove 10s ease-in-out infinite;
+        }
+        @keyframes bgmove {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+        .animated-bg {
+            display: none !important;
+        }
+
+        /* Hiệu ứng chuyển động nhẹ nhàng */
+        @keyframes subtleFloat {
+            0%   { transform: scale(1) translateY(0px) translateX(0px);}
+            25%  { transform: scale(1.03) translateY(-10px) translateX(10px);}
+            50%  { transform: scale(1.01) translateY(10px) translateX(-10px);}
+            75%  { transform: scale(1.04) translateY(-5px) translateX(5px);}
+            100% { transform: scale(1) translateY(0px) translateX(0px);}
+        }
+
+        /* Optimized sparkle effects */
+        .sparkle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: sparkleFloat linear infinite;
+            z-index: -2;
+            will-change: transform, opacity;
+        }
+
+        @keyframes sparkleFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateY(-50px) rotate(360deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced flower animation */
+        .flower {
+            position: absolute;
+            font-size: 25px;
+            animation: flowerFall linear infinite;
+            z-index: -1;
+            text-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
+            will-change: transform, opacity;
+        }
+
+        @keyframes flowerFall {
+            0% {
+                transform: translateY(-50px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(50vh) rotateX(180deg) rotateY(180deg) rotateZ(180deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(110vh) rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Main container */
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px 0;
+            position: relative;
+            z-index: 1;
+            background: rgba(255,255,255,0.13);
+            box-shadow: 0 8px 32px 0 rgba(255, 182, 213, 0.18), 0 1.5px 8px 0 rgba(255, 182, 213, 0.10);
+            border-radius: 32px;
+            max-width: 500px;
+            width: 100%;
+            max-width: auto;
+            height: auto;
+            margin: 40px auto;
+            transition: 
+                box-shadow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                border-color 0.4s,
+                background 0.4s;
+        }
+
+        /* Calculator screen và Birthday screen nền hồng mờ, viền hồng nhạt */
+        .calculator-screen,
+        .birthday-screen {
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    max-width: none !important;
+    width: auto !important;
+    border-radius: 0 !important;
+}
+        
+
+        /* Khi hover nổi bật hơn một chút */
+        .container:hover,
+        .birthday-screen:hover {
+            box-shadow: 0 20px 45px rgba(252, 189, 198, 0.25);
+            border-color: #eb9ec6;
+            transform: scale(1.02);
+        }
+
+        .calculator-title {
+            background: linear-gradient(135deg, #cc7986 0%, #fd537d 60%, #f0749d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 4px rgba(247, 152, 199, 0.3);
+        }
+
+        @keyframes titleGlow {
+            0% { filter: brightness(1) contrast(1); }
+            100% { filter: brightness(1.3) contrast(1.1); }
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Enhanced display */
+        .display {
+            width: 90%;
+            height: 55px;
+            background: linear-gradient(135deg, #ffd1dc, #ffb6d5, #f1c9dd, #ffd1dc);
+            background-size: 400% 400%;
+            animation: bgmove 10s ease-in-out infinite;
+            border: 2.5px solid rgba(255, 182, 213, 0.35); /* hồng nhạt, mờ */
+            border-radius: 20px;
+            font-size: 28px;
+            text-align: right;
+            padding: 0 25px;
+            margin-bottom: 30px;
+            outline: none;
+            letter-spacing: 4px;
+            font-weight: bold;
+            color: #c2185b;
+            text-shadow: 0 2px 8px #fff8;
+            box-shadow: inset 0 6px 12px rgba(0, 0, 0, 0.1),
+                0 4px 8px rgba(255, 105, 180, 0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .display:focus {
+            border-color: var(--primary-pink);
+            box-shadow: 
+                inset 0 6px 12px rgba(0, 0, 0, 0.1),
+                0 0 25px rgba(255, 105, 180, 0.4),
+                0 0 50px rgba(255, 105, 180, 0.2);
+            transform: scale(1.02);
+        }
+
+        /* Bàn phím: bo góc lớn, hiệu ứng bóng hồng nhẹ, nền mờ trong suốt */
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin: 18px auto 0 auto;
+            width: 100%;
+            max-width: 100%;
+            background-size: 400% 400%;
+            animation: bgmove 10s ease-in-out infinite;
+            border-radius: 28px;
+            box-shadow: 0 6px 32px 0 #ffb6c155, 0 2px 8px #f18dbf55;
+            /* Xóa border */
+            border: none;
+            padding: 22px 0 18px 0;
+            transition: box-shadow 0.3s, border-color 0.3s;
+        }
+
+        /* Enhanced button styles */
+        .btn {
+            height: 70px;
+    width: 100%;
+    border: none;
+    border-radius: 22px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.18s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+    box-sizing: border-box;
+    background: linear-gradient(135deg, #ffb6d5, #fdb1d7, #ffd1dc, #ffb6d5);
+    background-size: 400% 400%;
+    animation: bgmove 10s ease-in-out infinite;
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 2px 8px #ffb6c133;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(-3px) scale(0.98);
+            transition: all 0.1s ease;
+        }
+
+        .btn-number {
+            background: linear-gradient(135deg, #f19bc0 0%, #f7a8ce 60%, #f09dc9 100%);
+            color: #fff;
+            border: none;
+            font-weight: 700;
+            font-size: 1.15rem;
+            border-radius: 14px;
+            transition: all 0.18s;
+            height: 38px;
+            min-width: 0;
+            box-shadow: 0 2px 8px #ffb6c133;
+        }
+        .btn-number:hover, .btn-number:focus {
+            background: linear-gradient(135deg, #f1a6cc 0%, #e696c0 100%);
+            color: #fff;
+            box-shadow: 0 0 12px #eb97c1bb;
+        }
+
+        .btn-clear, .btn-enter {
+            background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
+            color: #eea2cb;
+            border: none;
+            font-weight: 700;
+            font-size: 1.15rem;
+            border-radius: 14px;
+            height: 38px;
+            min-width: 0;
+            box-shadow: 0 2px 8px #ffb6c133;
+            transition: all 0.18s;
+        }
+        .btn-clear:hover, .btn-enter:hover,
+        .btn-clear:focus, .btn-enter:focus {
+            background: linear-gradient(135deg, #f1bcc4, #ffd1dc);
+            color: #f8b2d5;
+            box-shadow: 0 0 12px #ffd1dcaa;
+        }
+
+        /* Ẩn các nút + - . */
+        .btn-number:nth-child(13),
+        .btn-number:nth-child(15),
+        .btn-number:nth-child(16) {
+            display: none !important;
+        }
+        
+
+        /* Enhanced birthday screen */
+
+.birthday-screen,
+.birthday-screen .letter-container,
+.birthday-screen .letter-opened,
+.birthday-screen .letter-closed {
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+}
+        @keyframes birthdayEntrance {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) rotate(-15deg);
+            }
+            50% {
+                transform: scale(1.1) rotate(5deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .birthday-title {
+            background: linear-gradient(45deg, 
+                var(--secondary-pink), var(--primary-pink), 
+                #ffd700, #ff4081, var(--secondary-pink));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 30px;
+            animation: rainbowText 4s ease-in-out infinite, 
+            titleBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes rainbowText {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes titleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .cake {
+            font-size: 120px;
+            margin: 30px 0;
+            animation: cakeParty 2.5s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.7));
+        }
+
+        @keyframes cakeParty {
+            0%, 100% {
+                transform: rotate(0deg) scale(1);
+            }
+            25% {
+                transform: rotate(-15deg) scale(1.1);
+            }
+            75% {
+                transform: rotate(15deg) scale(1.1);
+            }
+        }
+
+        .date-special {
+            background: linear-gradient(45deg, #e2aac6, #f080af, #ec728e, #ff69b4);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 36px;
+            font-weight: bold;
+            margin: 30px 0;
+            text-shadow: 0 4px 16px #f3c2c2, 0 2px 8px #df94b3;
+            animation: rainbowText 4s ease-in-out infinite;
+        }
+
+        .birthday-message {
+            color: #444;
+            font-size: 22px;
+            margin: 30px 0;
+            line-height: 1.8;
+            font-weight: 500;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            animation: messageFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes messageFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, var(--primary-pink), var(--secondary-pink));
+            color: white;
+            border: none;
+            padding: 18px 45px;
+            border-radius: 35px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 30px rgba(255, 105, 180, 0.4);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, #ffb6d5, #ff69b4, #ffd1dc, #ffb6d5);
+            background-size: 400% 400%;
+            animation: bgmove 10s ease-in-out infinite;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.15rem;
+            box-shadow: 0 2px 8px #ffb6c133;
+        }
+
+        .back-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .back-btn:hover::before {
+            left: 100%;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(240, 186, 213, 0.5);
+        }
+
+        /* Thiệp sinh nhật 3D */
+        @import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+        @import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+
+        .birthday-card-section {
+            margin: 50px 0;
+            z-index: 10;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-3d {
+            font-family: 'Indie Flower', cursive !important;
+            color: #013243;
+            position: relative;
+            width: 320px;
+            height: 420px;
+            background: linear-gradient(135deg, #ffd1dc, #ffb6d5);
+            transform-style: preserve-3d;
+            transform: perspective(2000px);
+            /* Sửa lại box-shadow cho đẹp hơn */
+            box-shadow: 
+                0 20px 40px rgba(255, 105, 180, 0.3),
+                0 10px 20px rgba(255, 182, 213, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transition: 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 15px;
+            cursor: pointer;
+            /* Thêm viền đẹp */
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .card-3d:hover {
+            transform: perspective(2000px) rotateY(15deg) scale(1.1);
+            /* Sửa lại hover shadow */
+            box-shadow: 
+                0 30px 60px rgba(255, 105, 180, 0.4),
+                0 15px 30px rgba(255, 182, 213, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        /* Xóa hoặc sửa lại các pseudo-element */
+        .card-3d:before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #ff69b4, #ffb6d5, #ffd1dc, #ff69b4);
+            background-size: 400% 400%;
+            animation: borderGlow 3s ease infinite;
+            border-radius: 18px;
+            z-index: -1;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .card-3d:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-radius: 15px;
+            pointer-events: none;
+        }
+
+        .card-imgBox {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-origin: left;
+            transition: 1s ease;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .card-bark {
+            position: absolute;
+            background: linear-gradient(135deg, #ffd1dc, #ffb6d5);
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: 1s ease;
+            border-radius: 15px;
+        }
+
+        .card-imgBox img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .card-3d:hover .card-imgBox {
+            transform: rotateY(-135deg);
+        }
+
+        .card-3d:hover .card-bark {
+            opacity: 1;
+            transition: 0.8s;
+            box-shadow: 300px 200px 100px rgba(255, 105, 180, 0.3) inset;
+        }
+
+        /* SỬA LẠI - Chữ trong thiệp hiển thị tĩnh, không chạy */
+        .card-details {
+            position: absolute;
+            top: 50%; /* Căn giữa theo chiều dọc */
+            left: 50%; /* Căn giữa theo chiều ngang */
+            width: 100%;
+            font-family: 'Poppins', Arial, sans-serif !important;
+            height: auto;
+            transform: translate(-50%, -50%); /* Dịch chuyển về giữa hoàn toàn */
+            box-sizing: border-box;
+            padding: 20px;
+            z-index: -1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card-details h4 {
+            font-size: 23px;
+            line-height: 1.1;
+            color: #C0392B;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            margin-top: 0;
+        }
+
+        .card-details p {
+            font-size: 16px;
+            line-height: 1.3;
+            transform: rotate(-2deg);
+            padding: 1px 0;
+            color: #013243;
+            font-weight: 600;
+            font-weight: 400;      /* Định dạng thường */
+            font-style: italic;
+            margin: 3px 0;
+            opacity: 1;
+            text-align: center;
+        }
+
+        /* Responsive cho thiệp 3D */
+        @media (max-width: 768px) {
+    .card-3d {
+        width: 280px;
+        height: 380px;
+    }
+    
+    .card-details h4 {
+        font-size: 22px;
+    }
+    
+    .card-details p {
+        font-size: 13px;
+    }
+}
+        /* Responsive design */
+        @media (max-width: 480px) {
+            .calculator-screen, .birthday-screen {
+                padding: 25px;
+                margin: 10px;
+                border-radius: 25px;
+            }
+            
+            .calculator-title {
+                font-size: 26px;
+            }
+            
+            .birthday-title {
+                font-size: 32px;
+            }
+            
+            .display {
+                height: 65px;
+                font-size: 24px;
+                padding: 0 20px;
+            }
+            
+            .btn {
+                height: 60px;
+                font-size: 20px;
+            }
+            
+            .cake {
+                font-size: 80px;
+            }
+            
+            .birthday-message {
+                font-size: 18px;
+            }
+        }
+
+        /* Performance optimizations */
+        .sparkle, .flower {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        /* Preload animations */
+        .preload * {
+            animation-duration: 0s !important;
+            animation-delay: 0s !important;
+            transition-duration: 0s !important;
+        }
+
+        .colorful-gradient {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: -2;
+            background: linear-gradient(120deg, #ffb6c1 0%, #ff69b4 30%, #ffd700 60%, #a18cd1 100%);
+            opacity: 0.55;
+            mix-blend-mode: lighten;
+            animation: gradientMove 12s ease-in-out infinite alternate;
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        /* Responsive cho thiệp 3D */
+@media (max-width: 768px) {
+    .card-3d {
+        width: 280px;
+        height: 380px;
+    }
+    
+    .card-details {
+        padding: 15px;
+    }
+    
+    .card-details h4 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+    
+    .card-details p {
+        font-size: 13px;
+        margin: 2px 0;
+        line-height: 1.2;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-3d {
+        width: 250px;
+        height: 340px;
+    }
+    
+    .card-details {
+        padding: 12px;
+    }
+    
+    .card-details h4 {
+        font-size: 20px;
+        margin-bottom: 12px;
+    }
+    
+    .card-details p {
+        font-size: 12px;
+        margin: 1px 0;
+    }
+}
+
+        /* Confetti styles */
+        .confetti {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background: hsl(0, 90%, 60%);
+            opacity: 0.9;
+            pointer-events: none;
+            animation: confettiFall 2s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, 100vh) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        .calculator-title-with-avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+
+        .avatar-upload {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .avatar-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffb6d5 60%, #ffd1dc 100%);
+            border: 2px solid #fff0f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 2px 8px #ffb6c133;
+            transition: box-shadow 0.2s;
+        }
+
+        .avatar-circle:hover {
+            box-shadow: 0 4px 16px #ffb6d155;
+        }
+
+        .avatar-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        #avatarPlaceholder {
+            font-size: 2em;
+            color: #ff69b4;
+            font-weight: bold;
+            user-select: none;
+        }
+
+        .avatar-square {
+            width: 150px;
+            height: 150px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ffb6d5 60%, #ffd1dc 100%);
+            border: 2.5px solid rgba(255, 182, 213, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 8px 32px 0 rgba(255, 182, 213, 0.18), 0 1.5px 8px 0 rgba(255, 182, 213, 0.10);
+            transition: box-shadow 0.2s;
+        }
+
+        .avatar-square:hover {
+            box-shadow: 0 4px 16px #ffb6d155;
+        }
+
+        .avatar-square img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        @keyframes keyEffect {
+            0% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05) rotate(5deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .input-avatar-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 32px;
+    width: 100%;
+}
+
+.avatar-square {
+    flex-shrink: 0;
+}
+
+.input-and-keypad {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    max-width: 260px;
+}
+
+.input-and-keypad .calculator-title {
+    align-self: flex-end;
+    margin-bottom: 18px;
+}
+
+.input-and-keypad .display {
+    align-self: flex-end;
+    margin-bottom: 18px;
+}
+
+.input-and-keypad .buttons {
+    align-self: flex-end;
+}
+
+.letter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px 0;
+    min-height: unset;
+    justify-content: center;
+}
+
+.letter-closed {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s;
+    user-select: none;
+}
+.letter-closed:hover {
+    transform: scale(1.07) rotate(-3deg);
+}
+
+.letter-text {
+    margin-top: 12px;
+    font-size: 1.2em;
+    color: #ff69b4;
+    font-weight: bold;
+    text-shadow: 0 2px 8px #fff;
+}
+
+.letter-opened {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    text-align: center;
+    min-height: 350px;
+    position: relative;
+}
+
+@keyframes letterOpenAnim {
+    0% { transform: scale(0.7) rotate(-10deg); opacity: 0; }
+    80% { transform: scale(1.1) rotate(3deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.heart-gallery {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 1100px;
+    height: 110px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 1100;
+}
+#openGiftBtn {
+    display: none;
+    margin: 30px auto 0 auto;
+    text-align: center;
+}
+.heart-gallery .heart-img {
+    position: absolute;
+    width: 170px;    /* tăng kích thước ảnh */
+    height: 170px;
+    border-radius: 36px;
+    object-fit: cover;
+    box-shadow: 0 4px 18px #ffb6d1bb, 0 1.5px 8px #ffb6d1aa;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.6s, transform 0.6s;
+    border: 3px solid #fff0f6;
+    background: #fff;
+    z-index: 2;
+}
+.heart-gallery .heart-img.show {
+    opacity: 1;
+    transform: scale(1.08) rotate(-8deg);
+    animation: popInHeart 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+}
+@keyframes popInHeart {
+    0% { opacity: 0; transform: scale(0.2) rotate(0deg);}
+    60% { opacity: 1; transform: scale(1.2) rotate(10deg);}
+    100% { opacity: 1; transform: scale(1.08) rotate(-8deg);}
+}
+/* Trang lời chúc đẹp - background trong suốt */
+.wishes-page {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Background trong suốt, để hiện background gradient chính của body */
+    background: none;
+    overflow: hidden;
+}
+
+/* Xóa overlay */
+.wishes-page::before {
+    display: none;
+}
+
+
+/* Trái tim bay đẹp hơn */
+.floating-hearts {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 28px;
+    animation: heartFloat 8s linear infinite;
+    opacity: 0.9;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes heartFloat {
+    0% {
+        transform: translateY(100vh) rotate(0deg) scale(0.5);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    50% { transform: translateY(50vh) rotate(180deg) scale(1); }
+    90% { opacity: 1; }
+    100% {
+        transform: translateY(-50px) rotate(360deg) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* Tiêu đề chính đẹp hơn */
+.main-title {
+    text-align: center;
+    margin-bottom: 30px;
+    z-index: 10;
+    position: relative;
+}
+
+.rainbow-text {
+    font-size: 2.9em;
+    font-weight: 900;
+    background: linear-gradient(45deg, #4649fd, #f141b7, #eeba0f);
+    background-size: 800% 800%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: rainbowMove 4s ease-in-out infinite;
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+    margin: 0;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes rainbowMove {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.subtitle {
+    font-size: 2em;
+    color: #fff;
+    font-weight: 700;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    margin-top: 15px;
+    animation: textGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+    from { 
+        text-shadow: 0 4px 20px rgba(255, 255, 255, 0.5);
+        transform: scale(1);
+    }
+    to { 
+        text-shadow: 0 4px 30px rgba(255, 255, 255, 0.9);
+        transform: scale(1.05);
+    }
+}
+
+/* Bánh sinh nhật cải thiện */
+.birthday-cake-section {
+    text-align: center;
+    margin: 30px 0;
+    z-index: 10;
+    position: relative;
+}
+
+.cake-emoji {
+    font-size: 6em;
+    animation: cakeBounce 3s ease-in-out infinite;
+    filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.4));
+}
+
+@keyframes cakeBounce {
+    0%, 100% { transform: translateY(0) rotate(-3deg) scale(1); }
+    50% { transform: translateY(-25px) rotate(3deg) scale(1.1); }
+}
+
+.candles {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: -20px;
+}
+
+.candle {
+    font-size: 2.8em;
+    animation: candleFlicker 2s ease-in-out infinite;
+    filter: drop-shadow(0 5px 10px rgba(255, 165, 0, 0.6));
+}
+
+.candle:nth-child(1) { animation-delay: 0s; }
+.candle:nth-child(2) { animation-delay: 0.7s; }
+.candle:nth-child(3) { animation-delay: 1.4s; }
+
+@keyframes candleFlicker {
+    0%, 100% { transform: scale(1) rotate(-2deg); opacity: 1; }
+    50% { transform: scale(1.15) rotate(2deg); opacity: 0.8; }
+}
+
+.continue-btn {
+    background: linear-gradient(45deg, #ee60ae, #ff9ff3);
+    background-size: 600% 600%;
+    border: none;
+    color: rgb(231, 230, 231);
+    padding: 18px 40px;
+    font-size: 1.5em;
+    font-weight: 800;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s ease;
+    animation: buttonGlow 4s ease-in-out infinite;
+    z-index: 10;
+    position: relative;
+    margin-top: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+@keyframes buttonGlow {
+    0%, 100% { 
+        background-position: 0% 50%;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        transform: scale(1);
+    }
+    50% { 
+        background-position: 100% 50%;
+        box-shadow: 0 25px 60px rgba(255, 107, 107, 0.5);
+        transform: scale(1.05);
+    }
+}
+
+.continue-btn:hover {
+    transform: translateY(-8px) scale(1.1);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.continue-btn:active {
+    transform: translateY(-5px) scale(1.05);
+}
+
+/* Responsive cải thiện */
+@media (max-width: 768px) {
+    .rainbow-text {
+        font-size: 2.5em;
+    }
+    .subtitle {
+        font-size: 1.5em;
+    }
+    .cake-emoji {
+        font-size: 5em;
+    }
+    .continue-btn {
+        padding: 18px 45px;
+        font-size: 1.5em;
+    }
+    .card-3d {
+        width: 280px;
+        height: 380px;
+    }
+}
+
+/* CSS animation cho confetti rơi */
+@keyframes confettiFall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* Envelope styles */
+.envelope-large {
+    width: 520px;
+    height: 340px;
+    margin: 40px auto 0 auto;
+    cursor: pointer;
+    z-index: 2;
+    perspective: 900px;
+    transition: transform 0.2s;
+    position: relative;
+}
+
+.envelope-large .envelope-body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 520px;
+    height: 220px;
+    background: #fff;
+    border: 5px solid #fc94bf;
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+    z-index: 2;
+    box-shadow: 0 16px 48px #e4d0d7aa;
+}
+.cake-emoji {
+    font-size: 6em;
+    animation: cakeBounce 3s ease-in-out infinite;
+    filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.4));
+}
+.envelope-large .envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 520px;
+    height: 180px;
+    background: linear-gradient(135deg, #ffb6d5 80%, #fc94bf 100%);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
+    border: 5px solid #fc94bf;
+    border-bottom: none;
+    z-index: 3;
+    box-shadow: 0 8px 24px #ffb6d1aa;
+}
+
+.envelope-large .envelope-shadow {
+    position: absolute;
+    bottom: -24px;
+    left: 40px;
+    width: 440px;
+    height: 44px;
+    background: radial-gradient(ellipse at center, #ffb6d155 0%, #fff0 80%);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.envelope-large .envelope-heart {
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%);
+    font-size: 4.5em;
+    z-index: 4;
+    pointer-events: none;
+    filter: drop-shadow(0 2px 12px #ffb6d1aa);
+    text-shadow: 0 2px 12px #fff, 0 0 24px #ffb6d1;
+}
+
+.envelope-large:hover {
+    transform: scale(1.03) rotate(-1deg);
+    box-shadow: 0 24px 64px #ffb6d1cc;
+}
+
+/* Bubble effects */
+.bubbles {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.bubble {
+    position: absolute;
+    bottom: -50px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: bubbleFloat linear infinite;
+}
+
+@keyframes bubbleFloat {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Background hearts */
+.bg-hearts {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.bg-heart {
+    position: absolute;
+    bottom: -50px;
+    animation: heartFloatBg linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes heartFloatBg {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateY(-50vh) rotate(180deg) scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg) scale(0.8);
+        opacity: 0;
+    }
+}
+
+/* Hiệu ứng bounce cho chữ "Không còn gì đâu" */
+@keyframes textBounce {
+    0%, 100% { 
+        transform: scale(1) translateY(0); 
+    }
+    50% { 
+        transform: scale(1.05) translateY(-20px); 
+    }
+}
+
+/* Responsive cho màn hình kết thúc */
+@media (max-width: 768px) {
+    #endScreen h1 {
+        font-size: 3em !important;
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    #endScreen h1 {
+        font-size: 2.2em !important;
+        padding: 0 15px;
+    }
+}
+
+/* Sửa thiệp 3D cho mobile - thay hover bằng active class */
+.card-3d.active .card-imgBox,
+.card-3d:hover .card-imgBox {
+    transform: rotateY(-135deg);
+}
+
+.card-3d.active .card-bark,
+.card-3d:hover .card-bark {
+    opacity: 1;
+    transition: 0.8s;
+    box-shadow: 300px 200px 100px rgba(255, 105, 180, 0.3) inset;
+}
+
+/* Responsive tốt hơn cho mobile */
+@media (max-width: 768px) {
+    .card-3d {
+        width: 280px;
+        height: 380px;
+        /* Thêm hiệu ứng transform để dễ nhấn hơn */
+        transform: perspective(1500px);
+    }
+    
+    .card-3d.active,
+    .card-3d:hover {
+        transform: perspective(1500px) rotateY(10deg) scale(1.05);
+    }
+    
+    .card-details h4 {
+        font-size: 22px;
+    }
+    
+    .card-details p {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-3d {
+        width: 250px;
+        height: 340px;
+    }
+    
+    .card-details h4 {
+        font-size: 20px;
+    }
+    
+    .card-details p {
+        font-size: 12px;
+    }
+}
+
+/* Hiệu ứng nhấn cho mobile */
+@media (max-width: 768px) {
+    .card-3d {
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .card-3d:active {
+        transform: perspective(1500px) scale(0.95);
+        transition: transform 0.1s ease;
+    }
+    
+    /* Thêm chỉ dẫn cho người dùng */
+    .card-3d::after {
+        content: '👆 Nhấn để xem lời chúc';
+        position: absolute;
+        bottom: -40px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        animation: tapHint 2s ease-in-out infinite;
+        pointer-events: none;
+    }
+    
+    .card-3d.active::after {
+        display: none;
+    }
+}
+
+@keyframes tapHint {
+    0%, 100% { 
+        opacity: 0.7;
+        transform: translateX(-50%) translateY(0);
+    }
+    50% { 
+        opacity: 1;
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+@media (max-width: 768px) {
+    .card-3d::after {
+        display: none !important;
+    }
+}
