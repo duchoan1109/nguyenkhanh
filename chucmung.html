@@ -1,25 +1,22 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bé</title>
+    <title>Happy Women's Day</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
     <style>
         * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    /* Cursor trái tim màu hồng đẹp hơn */
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="%23ff69b4" stroke="%23e91e63" stroke-width="1"/></svg>') 10 10, auto;
-}
-        .fireworks {
-        display: none;
-    }
-        body {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="%23ff69b4" stroke="%23e91e63" stroke-width="1"/></svg>') 10 10, auto;
+        }
+
+        body {
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -31,104 +28,47 @@
                 rgba(252, 173, 188, 0.8) 60%,
                 rgba(248, 174, 188, 0.9) 80%,
                 rgba(255, 200, 221, 0.8) 100% 
-            ),
-            linear-gradient(45deg, 
-                rgba(255, 255, 255, 0.3) 0%,
-                rgba(255, 255, 255, 0.1) 50%,
-                rgba(255, 255, 255, 0.3) 100%
             );
-            background-size: 400% 400%, 100% 100%;
+            background-size: 400% 400%;
             animation: dreamyPinkFlow 12s ease-in-out infinite;
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
         }
+
         @keyframes dreamyPinkFlow {
-            0% { 
-                background-position: 0% 50%, 0% 0%;
-            }
-            50% { 
-                background-position: 100% 50%, 100% 100%;
-            }
-            100% { 
-                background-position: 0% 50%, 0% 0%;
-            }
-        }
-
-        .congratulations-container {
-            text-align: center;
-            z-index: 10;
-            position: relative;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            animation: containerFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes containerFloat {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.01); }
-        }
-
-        .main-message {
-            font-size: 4em;
-            font-weight: 900;
-            background: linear-gradient(45deg, #22242c, #2c292e, #202022);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: simpleGradient 3s ease-in-out infinite;
-            margin: 0 0 30px 0;
-        }
-
-        @keyframes simpleGradient {
-            0%, 100% { background-position: 0% 50%; }
+            0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        .sub-message {
-            font-size: 2.5em;
-            color: #fff;
-            font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            margin: 20px 0;
-            animation: textGlow 3s ease-in-out infinite alternate;
+        /* Vị trí chung cho các SVG (Hoa và Tim) */
+        .svg-container {
+            width: 80%;
+            max-width: 600px;
+            position: absolute;
+            z-index: 10; /* Nằm trên ảnh cuộn */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
-        @keyframes textGlow {
-            from { 
-                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-                transform: scale(1);
-            }
-            to { 
-                text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
-                transform: scale(1.02);
-            }
+        #rose-t {
+            display: block;
         }
 
-        .back-home-btn {
-            background: linear-gradient(45deg, #181920, #141216);
-            border: none;
-            color: white;
-            padding: 20px 50px;
-            font-size: 1.5em;
-            font-weight: 700;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(119, 119, 119, 0.2);
-            transition: all 0.3s ease;
-            margin-top: 30px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        #theSvg {
+            display: none;
         }
 
-        .back-home-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        /* SVG text path (Viền trái tim) */
+        text {
+            fill: black; /* Đã đổi sang màu đen */
+            font-family: consolas;
+            font-size: 9px;
+            font-weight: bold;
         }
+
+        /* HIỆU ỨNG PHÁO HOA & ẢNH TRƯỢT NỀN */
         .fireworks {
             position: fixed;
             top: 0; left: 0;
@@ -145,21 +85,11 @@
         }
 
         @keyframes fireworkExplode {
-            0% {
-                transform: scale(0);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(10);
-                opacity: 0.6;
-            }
-            100% {
-                transform: scale(20);
-                opacity: 0;
-            }
+            0% { transform: scale(0); opacity: 1; }
+            50% { transform: scale(10); opacity: 0.6; }
+            100% { transform: scale(20); opacity: 0; }
         }
 
-        /* CSS cho ảnh - loại bỏ shadow phức tạp */
         .heart-images-container {
             position: fixed;
             top: 0; left: 0;
@@ -170,89 +100,237 @@
 
         .heart-img-scroll {
             position: absolute;
-            width: 150px;
-            height: 150px;
-            border-radius: 15px;
             object-fit: cover;
-            border: 3px solid rgba(255, 255, 255, 0.8); /* Viền trắng */
-            /* Shadow trắng đẹp */
+            border: 3px solid rgba(255, 255, 255, 0.8);
             box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
-            animation: scrollLeftToRight linear;
+            animation: scrollLeftToRight linear forwards;
             opacity: 0.9;
+            border-radius: 15px;
         }
 
-        /* Hiệu ứng chạy đơn giản hơn */
         @keyframes scrollLeftToRight {
-            0% {
-                transform: translateX(-190px) scale(0.5);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-                transform: translateX(-180px) scale(1);
-            }
-            90% {
-                opacity: 1;
-                transform: translateX(calc(100vw + 50px)) scale(1);
-            }
-            100% {
-                transform: translateX(calc(100vw + 70px)) scale(0.5);
-                opacity: 0;
-            }
+            0% { transform: translateX(-250px) scale(0.5); opacity: 0; }
+            10% { opacity: 1; transform: translateX(-180px) scale(1); }
+            90% { opacity: 1; transform: translateX(calc(100vw + 50px)) scale(1); }
+            100% { transform: translateX(calc(100vw + 150px)) scale(0.5); opacity: 0; }
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            .main-message {
-                font-size: 2.8em;
-            }
-            .sub-message {
-                font-size: 1.8em;
-            }
-            .heart-img-scroll {
-                width: 120px;
-                height: 120px;
-            }
+            .heart-img-scroll { width: 120px !important; height: 120px !important; }
         }
-
         @media (max-width: 480px) {
-            .main-message {
-                font-size: 2.2em;
-            }
-            .sub-message {
-                font-size: 1.4em;
-            }
-            .heart-img-scroll {
-                width: 100px;
-                height: 100px;
-            }
+            .heart-img-scroll { width: 100px !important; height: 100px !important; }
         }
     </style>
 </head>
-<body>
-    <!-- Hiệu ứng pháo hoa -->
-    <div class="fireworks" id="fireworks"></div>
 
-    <!-- Container cho ảnh trái tim chạy ngang -->
+<body>
+
+    <div class="fireworks" id="fireworks"></div>
     <div class="heart-images-container" id="heartImagesContainer"></div>
+
+    <svg id="rose-t" class="svg-container" viewBox="0 0 512 512">
+        <path class="leafOne" d="M124.302,328.222c-2.466-2.901-5.036-5.334-7.648-7.212c-1.884-1.354-4.49-1.207-6.201,0.36
+            c-32.608,29.866-18.892,84.017,24.01,94.752c2.251,0.563,4.612-0.548,5.624-2.636c0.407-0.841,0.781-1.732,1.138-2.648
+            C111.438,394.378,103.302,355.204,124.302,328.222z" />
+        <path class="stickLine" d="M337.625,212.314c2.37-3.44,1.501-8.149-1.939-10.519c-3.44-2.369-8.15-1.501-10.519,1.939
+            c-19.493,28.304-43.492,60.076-72.147,92.853l-2.542-30.875c-0.343-4.163-4-7.261-8.158-6.917c-4.163,0.343-7.26,3.995-6.917,8.158
+            l3.721,45.196C172.176,385.546,93.558,449.444,4.053,496.37c-3.699,1.94-5.127,6.512-3.187,10.211
+            c1.352,2.579,3.983,4.054,6.705,4.054c1.183,0,2.385-0.279,3.505-0.867c63.84-33.47,124.784-76.962,181.511-129.479
+            c5.891-2.031,32.15-10.225,68.671-8.819c4.156,0.167,7.689-3.09,7.85-7.266c0.161-4.174-3.092-7.689-7.267-7.849
+            c-18.678-0.721-34.824,0.89-47.384,3.036C259.688,314.785,301.126,265.31,337.625,212.314z" />
+        <path class="leafTwo" d="M329.58,413.715c30.055,1.827,57.188-13.413,71.993-37.343c1.738-2.81,1.253-6.495-1.142-8.771
+            c-13.04-12.394-37.78-21.675-66.625-23.428s-54.527,4.464-68.972,15.187c-2.653,1.969-3.581,5.568-2.196,8.568
+            C274.438,393.475,299.525,411.888,329.58,413.715z" />
+        <path class="leafS1" d="M370.677,231.945c-8.984-2.411-17.479-7.138-24.516-14.205c-5.085-5.106-8.742-10.981-11.143-17.242
+            c-6.645,0.902-13.554,0.516-20.475-1.491c-9.578-2.778-17.805-7.959-24.234-14.68c-12.216,1.01-22.611,4.593-28.859,9.642
+            c-1.416,1.145-1.839,3.149-0.999,4.772c7.157,13.821,21.478,23.41,38.131,23.745c11.548,0.232,22.109-4.035,30.031-11.178
+            c-2.461,10.379-1.13,21.692,4.621,31.709c8.293,14.445,23.583,22.401,39.142,22.039c1.826-0.042,3.382-1.376,3.705-3.168
+            C377.509,253.982,375.658,243.144,370.677,231.945z" />
+        <path class="rose1" d="M508.212,99.848c-2.666-4.581-27.324-44.843-71.558-48.206c-4.268-0.223-8.58-0.164-12.816,0.176
+            l-1.148,0.092l0.471,1.051c7.005,15.648,9.002,31.447,7.106,48.307l0.877,0.04c11.782,0.538,23.679,3.513,35.362,8.841l0.367,0.168
+            l0.355-0.188c10.841-5.728,22.445-6.783,35.477-3.225C506.927,108.058,510.397,103.599,508.212,99.848z M452.476,54.541c-4.96-1.457-10.233-2.474-15.823-2.899c-4.268-0.223-8.58-0.164-12.816,0.176
+            l-1.148,0.092l0.471,1.051c7.005,15.648,9.002,31.447,7.106,48.307l0.877,0.04c9.334,0.426,18.74,2.407,28.055,5.851
+            C461.04,88.852,458.784,71.19,452.476,54.541z" />
+        <path class="rose2" d="M418.642,40.96c-24.19-37.169-71.346-39.455-76.643-39.593c-4.34-0.114-6.582,5.071-3.543,8.22
+            c9.38,9.721,14.029,20.406,14.212,32.665l0.005,0.402l0.324,0.242c13.637,10.194,23.714,22.558,29.944,36.731
+            c4.198,10.201,6.37,19.468,7.545,29.411l0.996-0.402c8.962-3.617,18.525-6.008,28.405-7.105c3.688-0.322,7.481-0.397,11.274-0.223
+            l0.762,0.035C434.378,79.498,430.171,59.623,418.642,40.96z " />
+        <path class="rose3" d="M343.8,146.676c13.018-17.726,29.06-30.524,47.682-38.039l0.576-0.232
+            c-1.161-9.857-3.49-19.395-7.611-29.408c-20.694-47.084-74.317-58.577-80.363-59.731c-4.853-0.927-8.31,4.471-5.489,8.546
+            c21.533,31.149,7.895,59.383-14.633,90.009l0.071,0.029c-16.953,26.497-7.863,61.237,18.513,76.865
+            c3.932,2.33,8.219,4.207,12.806,5.537c6.757,1.959,13.752,2.469,20.787,1.514l1.017-0.138l-0.367-0.959
+            C330.327,183.817,333.08,162.625,343.8,146.676z" />
+        <path class="rose4" d="M510.726,141.7c-3.917-4.747-39.75-46.26-91.009-41.792c-21.664,2.405-52.653,12.308-77.277,45.856
+            c-13.392,19.922-16.495,52.272,4.132,72.986c3.371,3.385,7.075,6.243,11.008,8.573c26.325,15.597,61.186,6.961,76.309-20.683
+            l0.077,0.062c15.307-34.399,34.961-59.933,71.9-56.082C510.802,151.136,513.867,145.507,510.726,141.7z M370.903,162.627c27.904-38.017,75.307-57.751,121.144-38.743
+            c-16.072-12.613-41.381-26.674-72.329-23.977c-21.664,2.405-52.653,12.308-77.277,45.856c-13.392,19.922-16.495,52.272,4.132,72.986
+            c3.371,3.385,7.075,6.243,11.008,8.573c4.885,2.894,10.125,4.964,15.515,6.228C354.624,212.802,357.947,181.899,370.903,162.627z" />
+    </svg>
+
+    <svg id="theSvg" class="svg-container" viewBox="-120 -30 240 180" enable-background="new 0 0 174 148" xml:space="preserve">
+        <defs>
+            <path id="shape" d="M0, 21.054 
+                C0, 21.054 24.618, -15.165 60.750, 8.554 
+                C93.249, 29.888 57.749, 96.888 0, 117.388
+                C-57.749, 96.888  -93.249, 29.888 -60.750, 8.554
+                C-24.618, -15.165  -0, 21.054 -0, 21.054z" />
+            <path id="partialPath" />
+        </defs>
+
+        <text dy="-2">
+            <textPath style="font-family: fantasy;" xlink:href="#partialPath" startOffset="12">
+                🌹Happy Women's Day
+                🌹.........................................................................................................................................🌹From
+                With Love 8/3!🌹
+            </textPath>
+        </text>
+
+        <use id="useThePath" xlink:href="#partialPath" stroke="white" stroke-width=".5" stroke-opacity=".5" fill="none" style="display:none;" />
+
+        <foreignObject x="-70" y="20" width="140" height="85">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center;">
+                <span id="heart-text" style="color: black; font-size: 8px; font-weight: bold; font-family: 'Dancing Script', cursive; line-height: 1.4; word-wrap: break-word; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);"></span>
+            </div>
+        </foreignObject>
+    </svg>
 
 
     <script>
-        const heartImages = [
-            "gaixenh12.jpg", "gaixenh1.jpg", "gaixenh2.jpg", "gaixenh3.jpg", "gaixenh4.jpg","gaixenh5.jpg",
-            "gaixenh6.jpg", "gaixenh7.jpg", "gaixenh8.jpg", "gaixenh9.jpg","gaixenh10.jpg","gaixenh11.jpg",
-            "gaixenh12.jpg", "gaixenh1.jpg", "gaixenh2.jpg", "gaixenh3.jpg", "gaixenh4.jpg","gaixenh5.jpg",
-            "gaixenh6.jpg", "gaixenh7.jpg", "gaixenh8.jpg", "gaixenh9.jpg","gaixenh10.jpg","gaixenh11.jpg",
-            "gaixenh12.jpg", "gaixenh1.jpg", "gaixenh2.jpg", "gaixenh3.jpg", "gaixenh4.jpg","gaixenh5.jpg",
-            "gaixenh6.jpg", "gaixenh7.jpg", "gaixenh8.jpg", "gaixenh9.jpg","gaixenh10.jpg","gaixenh11.jpg"
+        // --- 1. SCRIPT VẼ TRÁI TIM THEO VIỀN ---
+        let rid = null;
+        const SVG_NS = "http://www.w3.org/2000/svg";
+        const pathlength = document.getElementById("shape").getTotalLength();
+        let t = 0;
+        let lengthAtT = pathlength * t;
+        let d = document.getElementById("shape").getAttribute("d");
+        let n = d.match(/C/gi).length;
+        let pos = 0;
 
+        class subPath {
+            constructor(d) {
+                this.d = d;
+                this.get_PointsRy();
+                this.previous = subpaths.length > 0 ? subpaths[subpaths.length - 1] : null;
+                this.measurePath();
+                this.get_M_Point();
+                this.get_lastCubicBezier();
+            }
+            get_PointsRy() {
+                this.pointsRy = [];
+                let temp = this.d.split(/[A-Z,a-z\s,]/).filter(v => v);
+                temp.map(item => { this.pointsRy.push(parseFloat(item)); });
+            }
+            measurePath() {
+                let path = document.createElementNS(SVG_NS, "path");
+                path.setAttributeNS(null, "d", this.d);
+                this.pathLength = path.getTotalLength();
+            }
+            get_M_Point() {
+                if (this.previous) {
+                    let p = this.previous.pointsRy;
+                    let l = p.length;
+                    this.M_point = [p[l - 2], p[l - 1]];
+                } else {
+                    let p = this.pointsRy;
+                    this.M_point = [p[0], p[1]];
+                }
+            }
+            get_lastCubicBezier() {
+                let lastIndexOfC = this.d.lastIndexOf("C");
+                let temp = this.d.substring(lastIndexOfC + 1).split(/[\s,]/).filter(v => v);
+                let _temp = [];
+                temp.map(item => { _temp.push(parseFloat(item)); });
+                this.lastCubicBezier = [this.M_point];
+                for (let i = 0; i < _temp.length; i += 2) {
+                    this.lastCubicBezier.push(_temp.slice(i, i + 2));
+                }
+            }
+        }
+
+        let subpaths = [];
+        for (let i = 0; i < n; i++) {
+            let newpos = d.indexOf("C", pos + 1);
+            if (i > 0) {
+                let sPath = new subPath(d.substring(0, newpos));
+                subpaths.push(sPath);
+            }
+            pos = newpos;
+        }
+        subpaths.push(new subPath(d));
+
+        let index;
+        for (index = 0; index < subpaths.length; index++) {
+            if (subpaths[index].pathLength >= lengthAtT) break;
+        }
+
+        function get_T(t, index) {
+            let T;
+            lengthAtT = pathlength * t;
+            if (index > 0) {
+                T = (lengthAtT - subpaths[index].previous.pathLength) /
+                    (subpaths[index].pathLength - subpaths[index].previous.pathLength);
+            } else {
+                T = lengthAtT / subpaths[index].pathLength;
+            }
+            return T;
+        }
+
+        function getBezierPoints(t, points) {
+            let helperPoints = [];
+            for (let i = 1; i < 4; i++) {
+                let p = lerp(points[i - 1], points[i], t);
+                helperPoints.push(p);
+            }
+            helperPoints.push(lerp(helperPoints[0], helperPoints[1], t));
+            helperPoints.push(lerp(helperPoints[1], helperPoints[2], t));
+            helperPoints.push(lerp(helperPoints[3], helperPoints[4], t));
+            let firstBezier = [points[0], helperPoints[0], helperPoints[3], helperPoints[5]];
+            return firstBezier;
+        }
+
+        function lerp(A, B, t) {
+            return [(B[0] - A[0]) * t + A[0], (B[1] - A[1]) * t + A[1]];
+        }
+
+        function drawCBezier(points, path, index) {
+            let d;
+            if (index > 0) {
+                d = subpaths[index].previous.d;
+            } else {
+                d = `M${points[0][0]},${points[0][1]} C`;
+            }
+            for (let i = 1; i < 4; i++) {
+                d += ` ${points[i][0]},${points[i][1]} `;
+            }
+            document.getElementById("partialPath").setAttributeNS(null, "d", d);
+        }
+
+        // --- 2. SCRIPT GÕ CHỮ TRỰC TIẾP Ở GIỮA TRÁI TIM ---
+        const textLetterP = "Hôm nay là ngày 16/03 muộn. Xin gửi lời chúc tới các bạn nữ. Luôn vui vẻ, luôn hạnh phúc và luôn may mắn trong cuộc sống, ngày càng xinh đẹp. Xin gửi tất cả lời chúc tốt đẹp đến với tất cả các bạn💗";
+        let indexTextContent = 0;
+        let textContainer = document.getElementById('heart-text');
+
+        function startTypingInHeart() {
+            if (indexTextContent < textLetterP.length) {
+                textContainer.textContent += textLetterP[indexTextContent];
+                indexTextContent++;
+                setTimeout(startTypingInHeart, 50); // Tốc độ gõ chữ
+            }
+        }
+
+        // --- 3. SCRIPT HIỆU ỨNG NỀN (PHÁO HOA & ẢNH TRƯỢT) ---
+        const heartImages = [
+            "thuyquynh.jpg", "Tulinh.jpg", "nhaminh.jpg", "MinhAnh.jpg",
+            "minhhang2.jpg", "myxuan.jpg", "xuantrang3.jpg", "thanhvan.jpg",
+            "tramanh.jpg", "xuantrang2.jpg", "xuantrang.jpg", "hieungan2.jpg",
+            "hieungan.jpg", "phuckhang.jpg", "xuanphuong.jpg", "bchau.jpg",
+            "minhhang.jpg", "baochausuy.jpg", "cohanh.jpg", "baochau.jpg"
         ];
 
-        // Tạo hiệu ứng pháo hoa
         function createFireworks() {
             const fireworks = document.getElementById('fireworks');
             const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff'];
-            
             for (let i = 0; i < 13; i++) {
                 setTimeout(() => {
                     const firework = document.createElement('div');
@@ -263,150 +341,126 @@
                     firework.style.animationDelay = Math.random() * 2 + 's';
                     firework.style.boxShadow = `0 0 20px ${firework.style.backgroundColor}`;
                     fireworks.appendChild(firework);
-                    
-                    setTimeout(() => {
-                        firework.remove();
-                    }, 2000);
+                    setTimeout(() => firework.remove(), 2000);
                 }, i * 350);
             }
         }
 
-        // Tạo ảnh hình chữ nhật chạy ngang - THÊM MỚI
         function createRectangleImage() {
             const container = document.getElementById('heartImagesContainer');
             const img = document.createElement('img');
-            
-            // Chọn ảnh ngẫu nhiên từ danh sách
-            const randomImage = heartImages[Math.floor(Math.random() * heartImages.length)];
-            img.src = randomImage;
+            img.src = heartImages[Math.floor(Math.random() * heartImages.length)];
             img.className = 'heart-img-scroll';
+            img.style.top = (Math.random() * 90) + 'vh';
             
-            // Vị trí Y ngẫu nhiên (từ 5% đến 90% chiều cao màn hình)
-            const randomY = Math.random() * 95;
-            img.style.top = randomY + 'vh';
-            
-            // Thời gian animation ngẫu nhiên (4-7 giây)
             const duration = 5 + Math.random() * 3;
             img.style.animationDuration = duration + 's';
             
-            // Shadow trắng
-            const shadowColors = [
-                'rgba(255, 255, 255, 0.4)', 
-                'rgba(255, 255, 255, 0.5)', 
-                'rgba(255, 255, 255, 0.6)',
-                'rgba(255, 255, 255, 0.3)',
-                'rgba(240, 240, 240, 0.5)'
-            ];
-            const randomShadow = shadowColors[Math.floor(Math.random() * shadowColors.length)];
-            img.style.boxShadow = `0 10px 30px ${randomShadow}`;
-            
-            const widths = [177, 170, 220, 188, 210, 240, 225,193];
-            const heights = [300,310, 150, 290, 210, 180, 380,330];
+            const widths = [177, 170, 220, 188, 210, 240, 225, 193];
+            const heights = [300, 310, 150, 290, 210, 180, 380, 330];
             const sizeIndex = Math.floor(Math.random() * widths.length);
             img.style.width = widths[sizeIndex] + 'px';
             img.style.height = heights[sizeIndex] + 'px';
             
-            // Cải thiện chất lượng ảnh
-            img.style.imageRendering = 'high-quality';
-            img.style.imageRendering = '-webkit-optimize-contrast';
-            img.style.imageRendering = 'crisp-edges';
-            
             container.appendChild(img);
-            
-            // Xóa ảnh sau khi animation hoàn thành
-            setTimeout(() => {
-                if (img.parentNode) {
-                    img.remove();
-                }
-            }, duration * 1000);
+            setTimeout(() => { if (img.parentNode) img.remove(); }, duration * 1000);
         }
 
-        // Tạo ảnh trái tim chạy ngang - 4K SIZE (HÌNH VUÔNG)
         function createScrollingHeartImage() {
             const container = document.getElementById('heartImagesContainer');
             const img = document.createElement('img');
-            
-            // Chọn ảnh ngẫu nhiên từ danh sách
-            const randomImage = heartImages[Math.floor(Math.random() * heartImages.length)];
-            img.src = randomImage;
+            img.src = heartImages[Math.floor(Math.random() * heartImages.length)];
             img.className = 'heart-img-scroll';
+            img.style.top = (Math.random() * 90) + 'vh';
             
-            // Vị trí Y ngẫu nhiên (từ 5% đến 90% chiều cao màn hình)
-            const randomY = Math.random() * 95;
-            img.style.top = randomY + 'vh';
-            
-            // Thời gian animation ngẫu nhiên (6-9 giây - CHẬM HƠN)
             const duration = 6 + Math.random() * 3;
             img.style.animationDuration = duration + 's';
             
-            // Thay đổi shadow thành màu trắng
-            const shadowColors = [
-                'rgba(255, 255, 255, 0.4)', 
-                'rgba(255, 255, 255, 0.5)', 
-                'rgba(255, 255, 255, 0.6)',
-                'rgba(255, 255, 255, 0.3)',
-                'rgba(240, 240, 240, 0.5)' // Trắng hơi xám nhẹ
-            ];
-            const randomShadow = shadowColors[Math.floor(Math.random() * shadowColors.length)];
-            img.style.boxShadow = `0 9px 25px ${randomShadow}`;
-            
-            // Kích thước hình vuông
             const sizes = [210, 240, 220, 230, 250, 210, 215, 235];
             const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
             img.style.width = randomSize + 'px';
             img.style.height = randomSize + 'px';
             
-            // Cải thiện chất lượng ảnh
-            img.style.imageRendering = 'high-quality';
-            img.style.imageRendering = '-webkit-optimize-contrast';
-            img.style.imageRendering = 'crisp-edges';
-            
             container.appendChild(img);
-            
-            // Xóa ảnh sau khi animation hoàn thành
-            setTimeout(() => {
-                if (img.parentNode) {
-                    img.remove();
-                }
-            }, duration * 1000);
+            setTimeout(() => { if (img.parentNode) img.remove(); }, duration * 1000);
         }
 
-        // Chạy ảnh hình chữ nhật liên tục - THÊM MỚI
-        function startRectangleImages() {
-            for (let i = 0; i < 13; i++) {
-                setTimeout(() => {
-                    createRectangleImage();
-                }, i * 240);
-            }
-            setInterval(createRectangleImage, 550); // Tăng thời gian để không quá nhanh
-        }
-55
-        function startScrollingHeartImages() {
-            for (let i = 0; i < 12; i++) {
-                setTimeout(() => {
-                    createScrollingHeartImage();
-                }, i * 2570);
-            }
-            setInterval(createScrollingHeartImage, 300);
-        }
-        function startContinuousFireworks() {
+        function startBackgroundEffects() {
             createFireworks();
             setInterval(createFireworks, 5000);
-        }
-        function createMultipleStreams() {
-    for (let stream = 0; stream < 3; stream++) {
-        setTimeout(() => {
-            startScrollingHeartImages();
-        }, stream * 160);
-    }
-}
 
-       
-        // Khởi tạo khi trang load - CẬP NHẬT
-        window.addEventListener('load', () => {
-            startContinuousFireworks();
-            startScrollingHeartImages(); // Ảnh hình vuông
-            startRectangleImages();      // Ảnh hình chữ nhật - THÊM MỚI
+            for (let i = 0; i < 13; i++) setTimeout(createRectangleImage, i * 240);
+            setInterval(createRectangleImage, 550);
+
+            for (let i = 0; i < 12; i++) setTimeout(createScrollingHeartImage, i * 2570);
+            setInterval(createScrollingHeartImage, 300);
+        }
+
+
+        // --- 4. HÀM CHUYỂN CẢNH KÍCH HOẠT TẤT CẢ ---
+        function nextStage() {
+            // Ẩn hoa, hiện tim
+            document.getElementById("rose-t").style.display = "none";
+            document.getElementById("theSvg").style.display = "block";
+
+            // Bắt đầu vẽ viền trái tim
+            rid = window.requestAnimationFrame(function Typing() {
+                rid = window.requestAnimationFrame(Typing);
+                if (t >= 1) {
+                    window.cancelAnimationFrame(rid);
+                    rid = null;
+                } else {
+                    t += 0.0025;
+                }
+                lengthAtT = pathlength * t;
+                for (index = 0; index < subpaths.length; index++) {
+                    if (subpaths[index].pathLength >= lengthAtT) break;
+                }
+                let T = get_T(t, index);
+                let newPoints = getBezierPoints(T, subpaths[index].lastCubicBezier);
+                drawCBezier(newPoints, document.getElementById("partialPath"), index);
+            });
+
+            // Bắt đầu gõ chữ ở giữa trái tim
+            setTimeout(startTypingInHeart, 500);
+
+            // Bắt đầu chạy hình nền & pháo hoa
+            startBackgroundEffects();
+        }
+
+        // --- 5. CHẠY ANIME HOA HỒNG BAN ĐẦU ---
+        var leafOne = document.querySelector('.leafOne');
+        var stickLine = document.querySelector('.stickLine');
+        var leafTwo = document.querySelector('.leafTwo');
+        var leafS1 = document.querySelector('.leafS1');
+        var rose1 = document.querySelector('.rose1');
+        var rose2 = document.querySelector('.rose2');
+        var rose3 = document.querySelector('.rose3');
+        var rose4 = document.querySelector('.rose4');
+
+        anime({
+            targets: [leafOne, stickLine, leafTwo, leafS1, rose1, rose2, rose3, rose4],
+            strokeDashoffset: [anime.setDashoffset, 0],
+            easing: 'easeInOutCubic',
+            duration: 4000,
+            begin: function (anim) {
+                let paths = [leafOne, stickLine, leafTwo, leafS1, rose1, rose2, rose3, rose4];
+                paths.forEach(p => { p.setAttribute("stroke", "black"); p.setAttribute("fill", "none"); });
+            },
+            complete: function (anim) {
+                leafOne.setAttribute("fill", "#9CDD05"); leafOne.setAttribute("stroke", "none");
+                leafTwo.setAttribute("fill", "#9CDD05"); leafTwo.setAttribute("stroke", "none");
+                stickLine.setAttribute("fill", "#83AA2E"); stickLine.setAttribute("stroke", "none");
+                leafS1.setAttribute("fill", "#9CDD05"); leafS1.setAttribute("stroke", "none");
+                rose1.setAttribute("fill", "#F37D79"); rose1.setAttribute("stroke", "none");
+                rose2.setAttribute("fill", "#D86666"); rose2.setAttribute("stroke", "none");
+                rose3.setAttribute("fill", "#F37D79"); rose3.setAttribute("stroke", "none");
+                rose4.setAttribute("fill", "#D86666"); rose4.setAttribute("stroke", "none");
+
+                // Kích hoạt bước tiếp theo (hiện trái tim, gõ chữ, nền)
+                setTimeout(nextStage, 1500); 
+            },
+            autoplay: true,
         });
     </script>
 </body>
