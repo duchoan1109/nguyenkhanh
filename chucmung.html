@@ -46,7 +46,7 @@
             width: 80%;
             max-width: 600px;
             position: absolute;
-            z-index: 10; /* Nằm trên ảnh cuộn */
+            z-index: 10;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -62,7 +62,7 @@
 
         /* SVG text path (Viền trái tim) */
         text {
-            fill: black; /* Đã đổi sang màu đen */
+            fill: black; 
             font-family: consolas;
             font-size: 9px;
             font-weight: bold;
@@ -125,6 +125,8 @@
 </head>
 
 <body>
+
+    <audio id="myAudio"></audio>
 
     <div class="fireworks" id="fireworks"></div>
     <div class="heart-images-container" id="heartImagesContainer"></div>
@@ -197,7 +199,37 @@
 
 
     <script>
-        // --- 1. SCRIPT VẼ TRÁI TIM THEO VIỀN ---
+        // --- 1. SCRIPT PHÁT NHẠC (PLAYLIST) ---
+        const playlist = ["nhac1.mp3", "nhac2.mp3", "nhac3.mp3"];
+        let currentSongIndex = 0;
+        const audioPlayer = document.getElementById("myAudio");
+
+        // Tự động chuyển bài khi hết bài hiện tại
+        audioPlayer.addEventListener('ended', function() {
+            currentSongIndex++;
+            if (currentSongIndex >= playlist.length) {
+                currentSongIndex = 0; // Quay lại bài đầu tiên nếu đã phát hết
+            }
+            audioPlayer.src = playlist[currentSongIndex];
+            audioPlayer.play().catch(e => console.log(e));
+        });
+
+        function playMusic() {
+            audioPlayer.src = playlist[currentSongIndex];
+            audioPlayer.play().catch(error => {
+                console.log("Trình duyệt chặn autoplay, vui lòng click vào màn hình để phát nhạc.");
+            });
+        }
+
+        // Bắt sự kiện click vào màn hình để đảm bảo nhạc được phép phát nếu autoplay bị chặn
+        document.body.addEventListener('click', function() {
+            if (audioPlayer.paused && document.getElementById("theSvg").style.display === "block") {
+                audioPlayer.play();
+            }
+        }, { once: true });
+
+
+        // --- 2. SCRIPT VẼ TRÁI TIM THEO VIỀN ---
         let rid = null;
         const SVG_NS = "http://www.w3.org/2000/svg";
         const pathlength = document.getElementById("shape").getTotalLength();
@@ -306,8 +338,8 @@
             document.getElementById("partialPath").setAttributeNS(null, "d", d);
         }
 
-        // --- 2. SCRIPT GÕ CHỮ TRỰC TIẾP Ở GIỮA TRÁI TIM ---
-        const textLetterP = "Hôm nay là ngày 16/03 muộn. Xin gửi lời chúc tới các bạn nữ. Luôn vui vẻ, luôn hạnh phúc và luôn may mắn trong cuộc sống, ngày càng xinh đẹp. Xin gửi tất cả lời chúc tốt đẹp đến với tất cả các bạn💗";
+        // --- 3. SCRIPT GÕ CHỮ TRỰC TIẾP Ở GIỮA TRÁI TIM ---
+        const textLetterP = "Hôm nay là ngày 08/03. Xin gửi lời chúc tới người tớ yêu thương nhất. Luôn vui vẻ, luôn hạnh phúc và luôn may mắn trong cuộc sống, ngày càng xinh đẹp. Xin gửi tất cả lời chúc tốt đẹp đến với cậu. Love You💗";
         let indexTextContent = 0;
         let textContainer = document.getElementById('heart-text');
 
@@ -315,17 +347,20 @@
             if (indexTextContent < textLetterP.length) {
                 textContainer.textContent += textLetterP[indexTextContent];
                 indexTextContent++;
-                setTimeout(startTypingInHeart, 50); // Tốc độ gõ chữ
+                setTimeout(startTypingInHeart, 50);
             }
         }
 
-        // --- 3. SCRIPT HIỆU ỨNG NỀN (PHÁO HOA & ẢNH TRƯỢT) ---
+        // --- 4. SCRIPT HIỆU ỨNG NỀN VÀ CẬP NHẬT ẢNH ---
+        // Đã thêm các hình ảnh mới của bạn vào mảng này
         const heartImages = [
             "thuyquynh.jpg", "Tulinh.jpg", "nhaminh.jpg", "MinhAnh.jpg",
             "minhhang2.jpg", "myxuan.jpg", "xuantrang3.jpg", "thanhvan.jpg",
             "tramanh.jpg", "xuantrang2.jpg", "xuantrang.jpg", "hieungan2.jpg",
             "hieungan.jpg", "phuckhang.jpg", "xuanphuong.jpg", "bchau.jpg",
-            "minhhang.jpg", "baochausuy.jpg", "cohanh.jpg", "baochau.jpg"
+            "minhhang.jpg", "baochausuy.jpg", "cohanh.jpg", "baochau.jpg",
+            "gianhu2000.jpg", "gianghi900.jpg", "nhaminh20.jpg", "nhavy100.jpg", 
+            "gianghi20.jpg", "nhavy20.jpg", "baongoc.jpg"
         ];
 
         function createFireworks() {
@@ -397,8 +432,11 @@
         }
 
 
-        // --- 4. HÀM CHUYỂN CẢNH KÍCH HOẠT TẤT CẢ ---
+        // --- 5. HÀM CHUYỂN CẢNH KÍCH HOẠT TẤT CẢ ---
         function nextStage() {
+            // Phát playlist nhạc
+            playMusic();
+
             // Ẩn hoa, hiện tim
             document.getElementById("rose-t").style.display = "none";
             document.getElementById("theSvg").style.display = "block";
@@ -428,7 +466,7 @@
             startBackgroundEffects();
         }
 
-        // --- 5. CHẠY ANIME HOA HỒNG BAN ĐẦU ---
+        // --- 6. CHẠY ANIME HOA HỒNG BAN ĐẦU ---
         var leafOne = document.querySelector('.leafOne');
         var stickLine = document.querySelector('.stickLine');
         var leafTwo = document.querySelector('.leafTwo');
@@ -457,7 +495,7 @@
                 rose3.setAttribute("fill", "#F37D79"); rose3.setAttribute("stroke", "none");
                 rose4.setAttribute("fill", "#D86666"); rose4.setAttribute("stroke", "none");
 
-                // Kích hoạt bước tiếp theo (hiện trái tim, gõ chữ, nền)
+                // Kích hoạt bước tiếp theo (hiện trái tim, gõ chữ, nền, bật nhạc)
                 setTimeout(nextStage, 1500); 
             },
             autoplay: true,
