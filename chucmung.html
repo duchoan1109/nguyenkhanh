@@ -149,16 +149,13 @@
     </svg>
 
     <script>
-        // --- PHÁ VÒNG LẶP: KIỂM TRA NGAY KHI VỪA VÀO TRANG ---
         const params = new URLSearchParams(window.location.search);
         if (params.get('step') === 'wishes') {
-            // Nếu từ bánh kem quay lại, thực hiện chuyển cảnh ngay lập tức
             window.addEventListener('DOMContentLoaded', () => {
                 nextStage();
             });
         }
 
-        // --- 1. PLAYLIST NHẠC ---
         const playlist = ["nhac1.mp3", "nhac2.mp3", "nhac3.mp3"];
         let currentSongIndex = 0;
         const audioPlayer = document.getElementById("myAudio");
@@ -171,26 +168,14 @@
 
         function playMusic() {
             audioPlayer.src = playlist[currentSongIndex];
-            audioPlayer.play().catch(e => console.log("Nhạc chờ click màn hình"));
+            audioPlayer.play().catch(e => console.log("Music ready"));
         }
 
-        // --- 2. HÌNH ẢNH TRÔI NỀN ---
         const heartImages = [
-            "e17cdf9b-717a-46a4-b10a-d1ab6cd896cf.jpg",
-            "4d1e62b7-4ae6-4b2a-a3b2-c90b362377f1.jpg",
-            "04902444-bb9a-47d9-a25f-9bf194eeb3b3.jpg",
-            "1c0fee8f-73dc-4a2d-acfe-1b6af7e74393.jpg",
-            "a1b6f57c-f88b-4f5e-821c-150baea967a1.jpg",
-            "bd4b2b39-d6c8-437e-83ce-585f9cad8a71.jpg",
-            "3d2043d3-a623-4ee4-b23f-a409f98d0fdd.jpg",
-            "ecd48ccb-f779-408d-94de-abfc0672dc66.jpg",
-            "32ecf8fd-bb46-49b1-ac59-ab3f8feb24aa.jpg",
-            "nogn.jpg",
-            "38ef3d39-7d64-456a-a1a1-92b22e192120.jpg",
-            "edd23532-0e2f-4913-b9e4-4f730e5a5117.jpg",
-            "23f93129-87da-4145-a7cd-36d5cd9ba3a1.jpg",
-            "gaixenh.jpg",
-            "2cbbd109-8eaa-47a6-8534-349b7b2f482c.jpg"
+            "e17cdf9b-717a-46a4-b10a-d1ab6cd896cf.jpg", "4d1e62b7-4ae6-4b2a-a3b2-c90b362377f1.jpg",
+            "04902444-bb9a-47d9-a25f-9bf194eeb3b3.jpg", "1c0fee8f-73dc-4a2d-acfe-1b6af7e74393.jpg",
+            "a1b6f57c-f88b-4f5e-821c-150baea967a1.jpg", "bd4b2b39-d6c8-437e-83ce-585f9cad8a71.jpg",
+            "32ecf8fd-bb46-49b1-ac59-ab3f8feb24aa.jpg", "nogn.jpg", "gaixenh.jpg"
         ];
 
         function createFireworks() {
@@ -225,7 +210,6 @@
             setTimeout(() => img.remove(), duration * 1000);
         }
 
-        // --- 3. LOGIC GÕ CHỮ TRONG TIM ---
         const textLetterP = "chúc anh tuổi 18 thật ý nghĩa đi đường cẩn thận về nhà an toàn anh nhé💗";
         let indexTextContent = 0;
 
@@ -237,34 +221,22 @@
             }
         }
 
-        // --- 4. HÀM CHUYỂN CẢNH ---
         function nextStage() {
             playMusic();
             document.getElementById("rose-t").style.display = "none";
             document.getElementById("theSvg").style.display = "block";
             
-            // Vẽ viền trái tim
+            // ÉP HIỆN NGUYÊN TRÁI TIM NGAY LẬP TỨC
             const path = document.getElementById("shape");
             const partial = document.getElementById("partialPath");
-            let progress = 0;
-            const draw = () => {
-                progress += 0.005;
-                if (progress <= 1) {
-                    partial.setAttribute("d", path.getAttribute("d"));
-                    partial.style.strokeDasharray = path.getTotalLength();
-                    partial.style.strokeDashoffset = path.getTotalLength() * (1 - progress);
-                    requestAnimationFrame(draw);
-                }
-            };
-            draw();
-
+            partial.setAttribute("d", path.getAttribute("d")); // Hiện đầy đủ hình dáng trái tim
+            
             setTimeout(startTypingInHeart, 500);
             createFireworks();
             setInterval(createFireworks, 6000);
             setInterval(createScrollingImage, 800);
         }
 
-        // --- 5. KHỞI CHẠY HOA HỒNG BAN ĐẦU (Chỉ chạy khi không có step=wishes) ---
         if (params.get('step') !== 'wishes') {
             anime({
                 targets: 'path',
