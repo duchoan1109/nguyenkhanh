@@ -149,6 +149,15 @@
     </svg>
 
     <script>
+        // --- PHÁ VÒNG LẶP: KIỂM TRA NGAY KHI VỪA VÀO TRANG ---
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('step') === 'wishes') {
+            // Nếu từ bánh kem quay lại, thực hiện chuyển cảnh ngay lập tức
+            window.addEventListener('DOMContentLoaded', () => {
+                nextStage();
+            });
+        }
+
         // --- 1. PLAYLIST NHẠC ---
         const playlist = ["nhac1.mp3", "nhac2.mp3", "nhac3.mp3"];
         let currentSongIndex = 0;
@@ -162,10 +171,10 @@
 
         function playMusic() {
             audioPlayer.src = playlist[currentSongIndex];
-            audioPlayer.play().catch(e => console.log("Autoplay blocked"));
+            audioPlayer.play().catch(e => console.log("Nhạc chờ click màn hình"));
         }
 
-        // --- 2. CẬP NHẬT HÌNH ẢNH TỪ THƯ MỤC MỚI ---
+        // --- 2. HÌNH ẢNH TRÔI NỀN ---
         const heartImages = [
             "e17cdf9b-717a-46a4-b10a-d1ab6cd896cf.jpg",
             "4d1e62b7-4ae6-4b2a-a3b2-c90b362377f1.jpg",
@@ -184,7 +193,6 @@
             "2cbbd109-8eaa-47a6-8534-349b7b2f482c.jpg"
         ];
 
-        // --- 3. HIỆU ỨNG PHÁO HOA ---
         function createFireworks() {
             const fireworks = document.getElementById('fireworks');
             const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#feca57', '#ff9ff3'];
@@ -201,42 +209,41 @@
             }
         }
 
-        // --- 4. HIỆU ỨNG TRÔI ẢNH ---
         function createScrollingImage() {
             const container = document.getElementById('heartImagesContainer');
+            if(!container) return;
             const img = document.createElement('img');
             img.src = heartImages[Math.floor(Math.random() * heartImages.length)];
             img.className = 'heart-img-scroll';
             img.style.top = (Math.random() * 80) + 'vh';
-            
             const duration = 6 + Math.random() * 4;
             img.style.animationDuration = duration + 's';
-            
             const size = 150 + Math.random() * 100;
             img.style.width = size + 'px';
-            img.style.height = (size * 1.3) + 'px'; // Giữ tỷ lệ ảnh dọc
-            
+            img.style.height = (size * 1.3) + 'px';
             container.appendChild(img);
             setTimeout(() => img.remove(), duration * 1000);
         }
 
-        // --- 5. LOGIC CHUYỂN CẢNH ---
+        // --- 3. LOGIC GÕ CHỮ TRONG TIM ---
         const textLetterP = "Hôm nay là ngày 29/03. Xin gửi lời chúc tới người tớ yêu thương nhất. Luôn vui vẻ, luôn hạnh phúc và luôn may mắn trong cuộc sống, ngày càng xinh đẹp. Xin gửi tất cả lời chúc tốt đẹp đến với cậu. Love You💗";
         let indexTextContent = 0;
 
         function startTypingInHeart() {
-            if (indexTextContent < textLetterP.length) {
-                document.getElementById('heart-text').textContent += textLetterP[indexTextContent++];
+            const el = document.getElementById('heart-text');
+            if (el && indexTextContent < textLetterP.length) {
+                el.textContent += textLetterP[indexTextContent++];
                 setTimeout(startTypingInHeart, 50);
             }
         }
 
+        // --- 4. HÀM CHUYỂN CẢNH ---
         function nextStage() {
             playMusic();
             document.getElementById("rose-t").style.display = "none";
             document.getElementById("theSvg").style.display = "block";
             
-            // Vẽ viền trái tim (giản lược để chạy nhanh hơn)
+            // Vẽ viền trái tim
             const path = document.getElementById("shape");
             const partial = document.getElementById("partialPath");
             let progress = 0;
@@ -257,21 +264,22 @@
             setInterval(createScrollingImage, 800);
         }
 
-        // --- 6. KHỞI CHẠY HOA HỒNG ---
-        anime({
-            targets: 'path',
-            strokeDashoffset: [anime.setDashoffset, 0],
-            easing: 'easeInOutCubic',
-            duration: 3000,
-            complete: function() {
-                // Tô màu sau khi vẽ xong
-                document.querySelectorAll('.leafOne, .leafTwo, .leafS1').forEach(el => el.setAttribute("fill", "#9CDD05"));
-                document.querySelector('.stickLine').setAttribute("fill", "#83AA2E");
-                document.querySelectorAll('.rose1, .rose3').forEach(el => el.setAttribute("fill", "#F37D79"));
-                document.querySelectorAll('.rose2, .rose4').forEach(el => el.setAttribute("fill", "#D86666"));
-                setTimeout(nextStage, 1000);
-            }
-        });
+        // --- 5. KHỞI CHẠY HOA HỒNG BAN ĐẦU (Chỉ chạy khi không có step=wishes) ---
+        if (params.get('step') !== 'wishes') {
+            anime({
+                targets: 'path',
+                strokeDashoffset: [anime.setDashoffset, 0],
+                easing: 'easeInOutCubic',
+                duration: 3000,
+                complete: function() {
+                    document.querySelectorAll('.leafOne, .leafTwo, .leafS1').forEach(el => el.setAttribute("fill", "#9CDD05"));
+                    document.querySelector('.stickLine').setAttribute("fill", "#83AA2E");
+                    document.querySelectorAll('.rose1, .rose3').forEach(el => el.setAttribute("fill", "#F37D79"));
+                    document.querySelectorAll('.rose2, .rose4').forEach(el => el.setAttribute("fill", "#D86666"));
+                    setTimeout(nextStage, 1000);
+                }
+            });
+        }
     </script>
 </body>
 </html>
