@@ -151,6 +151,15 @@
     </svg>
 
     <script>
+        // --- CHỐNG VÒNG LẶP: KIỂM TRA NGAY KHI TRANG LOAD ---
+        window.addEventListener('load', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('step') === 'wishes') {
+                // Nếu từ banhkem.html quay lại, nhảy thẳng vào Stage Trái Tim
+                nextStage();
+            }
+        });
+
         // --- 1. PLAYLIST NHẠC ---
         const playlist = ["nhac1.mp3", "nhac2.mp3", "nhac3.mp3"];
         let currentSongIndex = 0;
@@ -209,7 +218,7 @@
             setTimeout(() => img.remove(), duration * 1000);
         }
 
-        // --- 2. LOGIC VẼ TRÁI TIM CHUẨN (KHÔNG RÚT GỌN) ---
+        // --- 2. LOGIC VẼ TRÁI TIM ---
         let rid = null;
         const SVG_NS = "http://www.w3.org/2000/svg";
         const path = document.getElementById("shape");
@@ -254,6 +263,7 @@
         }
 
         function initSubPaths() {
+            subpaths = []; // Clear cũ
             let d = path.getAttribute("d");
             let n = d.match(/C/gi).length;
             let pos = 0;
@@ -292,8 +302,9 @@
         let indexTextContent = 0;
 
         function startTypingInHeart() {
-            if (indexTextContent < textLetterP.length) {
-                document.getElementById('heart-text').textContent += textLetterP[indexTextContent++];
+            const el = document.getElementById('heart-text');
+            if (el && indexTextContent < textLetterP.length) {
+                el.textContent += textLetterP[indexTextContent++];
                 setTimeout(startTypingInHeart, 50);
             }
         }
@@ -322,19 +333,25 @@
             setInterval(createScrollingImage, 800);
         }
 
+        // --- KHỞI CHẠY HOA HỒNG ---
         anime({
             targets: 'path',
             strokeDashoffset: [anime.setDashoffset, 0],
             easing: 'easeInOutCubic',
             duration: 3000,
             complete: function() {
-                document.querySelectorAll('.leafOne, .leafTwo, .leafS1').forEach(el => el.setAttribute("fill", "#9CDD05"));
-                document.querySelector('.stickLine').setAttribute("fill", "#83AA2E");
-                document.querySelectorAll('.rose1, .rose3').forEach(el => el.setAttribute("fill", "#F37D79"));
-                document.querySelectorAll('.rose2, .rose4').forEach(el => el.setAttribute("fill", "#D86666"));
-                setTimeout(nextStage, 1000);
+                // Chỉ chạy hoa hồng nếu KHÔNG có tham số step=wishes
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.get('step') !== 'wishes') {
+                    document.querySelectorAll('.leafOne, .leafTwo, .leafS1').forEach(el => el.setAttribute("fill", "#9CDD05"));
+                    document.querySelector('.stickLine').setAttribute("fill", "#83AA2E");
+                    document.querySelectorAll('.rose1, .rose3').forEach(el => el.setAttribute("fill", "#F37D79"));
+                    document.querySelectorAll('.rose2, .rose4').forEach(el => el.setAttribute("fill", "#D86666"));
+                    setTimeout(nextStage, 1000);
+                }
             }
         });
     </script>
+    <script src="lang.js"></script>
 </body>
 </html>
