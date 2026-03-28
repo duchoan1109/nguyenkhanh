@@ -80,7 +80,7 @@ function deleteLast() {
 // HÀM KIỂM TRA MẬT KHẨU
 function checkPassword() {
     // Thay '00000000' bằng ngày sinh đúng của bạn
-    if (display.value === '00000000') { 
+    if (display.value === '29032008') { 
         window.location.href = 'banhkem.html';
     } else {
         // Hiệu ứng rung khi sai
