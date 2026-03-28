@@ -138,9 +138,7 @@
         </defs>
         <text dy="-2">
             <textPath style="font-family: fantasy;" xlink:href="#partialPath" startOffset="12">
-                🌹Happy Birthday Day
-                🌹.........................................................................................................................................🌹From
-                With Love 29/3!🌹            
+                🌹Happy Birthday Day 🌹................................🌹From With Love 29/3!🌹
             </textPath>
         </text>
         <foreignObject x="-70" y="20" width="140" height="85">
@@ -151,15 +149,6 @@
     </svg>
 
     <script>
-        // --- CHỐNG VÒNG LẶP: KIỂM TRA NGAY KHI TRANG LOAD ---
-        window.addEventListener('load', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('step') === 'wishes') {
-                // Nếu từ banhkem.html quay lại, nhảy thẳng vào Stage Trái Tim
-                nextStage();
-            }
-        });
-
         // --- 1. PLAYLIST NHẠC ---
         const playlist = ["nhac1.mp3", "nhac2.mp3", "nhac3.mp3"];
         let currentSongIndex = 0;
@@ -176,17 +165,26 @@
             audioPlayer.play().catch(e => console.log("Autoplay blocked"));
         }
 
+        // --- 2. CẬP NHẬT HÌNH ẢNH TỪ THƯ MỤC MỚI ---
         const heartImages = [
-            "e17cdf9b-717a-46a4-b10a-d1ab6cd896cf.jpg", "4d1e62b7-4ae6-4b2a-a3b2-c90b362377f1.jpg",
-            "04902444-bb9a-47d9-a25f-9bf194eeb3b3.jpg", "1c0fee8f-73dc-4a2d-acfe-1b6af7e74393.jpg",
-            "a1b6f57c-f88b-4f5e-821c-150baea967a1.jpg", "bd4b2b39-d6c8-437e-83ce-585f9cad8a71.jpg",
-            "3d2043d3-a623-4ee4-b23f-a409f98d0fdd.jpg", "ecd48ccb-f779-408d-94de-abfc0672dc66.jpg",
-            "32ecf8fd-bb46-49b1-ac59-ab3f8feb24aa.jpg", "nogn.jpg",
-            "38ef3d39-7d64-456a-a1a1-92b22e192120.jpg", "edd23532-0e2f-4913-b9e4-4f730e5a5117.jpg",
-            "23f93129-87da-4145-a7cd-36d5cd9ba3a1.jpg", "gaixenh.jpg",
+            "e17cdf9b-717a-46a4-b10a-d1ab6cd896cf.jpg",
+            "4d1e62b7-4ae6-4b2a-a3b2-c90b362377f1.jpg",
+            "04902444-bb9a-47d9-a25f-9bf194eeb3b3.jpg",
+            "1c0fee8f-73dc-4a2d-acfe-1b6af7e74393.jpg",
+            "a1b6f57c-f88b-4f5e-821c-150baea967a1.jpg",
+            "bd4b2b39-d6c8-437e-83ce-585f9cad8a71.jpg",
+            "3d2043d3-a623-4ee4-b23f-a409f98d0fdd.jpg",
+            "ecd48ccb-f779-408d-94de-abfc0672dc66.jpg",
+            "32ecf8fd-bb46-49b1-ac59-ab3f8feb24aa.jpg",
+            "nogn.jpg",
+            "38ef3d39-7d64-456a-a1a1-92b22e192120.jpg",
+            "edd23532-0e2f-4913-b9e4-4f730e5a5117.jpg",
+            "23f93129-87da-4145-a7cd-36d5cd9ba3a1.jpg",
+            "gaixenh.jpg",
             "2cbbd109-8eaa-47a6-8534-349b7b2f482c.jpg"
         ];
 
+        // --- 3. HIỆU ỨNG PHÁO HOA ---
         function createFireworks() {
             const fireworks = document.getElementById('fireworks');
             const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#feca57', '#ff9ff3'];
@@ -203,108 +201,32 @@
             }
         }
 
+        // --- 4. HIỆU ỨNG TRÔI ẢNH ---
         function createScrollingImage() {
             const container = document.getElementById('heartImagesContainer');
             const img = document.createElement('img');
             img.src = heartImages[Math.floor(Math.random() * heartImages.length)];
             img.className = 'heart-img-scroll';
             img.style.top = (Math.random() * 80) + 'vh';
+            
             const duration = 6 + Math.random() * 4;
             img.style.animationDuration = duration + 's';
+            
             const size = 150 + Math.random() * 100;
             img.style.width = size + 'px';
-            img.style.height = (size * 1.3) + 'px';
+            img.style.height = (size * 1.3) + 'px'; // Giữ tỷ lệ ảnh dọc
+            
             container.appendChild(img);
             setTimeout(() => img.remove(), duration * 1000);
         }
 
-        // --- 2. LOGIC VẼ TRÁI TIM ---
-        let rid = null;
-        const SVG_NS = "http://www.w3.org/2000/svg";
-        const path = document.getElementById("shape");
-        const pathlength = path.getTotalLength();
-        let subpaths = [];
-
-        class subPath {
-            constructor(d) {
-                this.d = d;
-                this.get_PointsRy();
-                this.previous = subpaths.length > 0 ? subpaths[subpaths.length - 1] : null;
-                this.measurePath();
-                this.get_M_Point();
-                this.get_lastCubicBezier();
-            }
-            get_PointsRy() {
-                this.pointsRy = [];
-                let temp = this.d.split(/[A-Z,a-z\s,]/).filter(v => v);
-                temp.map(item => { this.pointsRy.push(parseFloat(item)); });
-            }
-            measurePath() {
-                let p = document.createElementNS(SVG_NS, "path");
-                p.setAttributeNS(null, "d", this.d);
-                this.pathLength = p.getTotalLength();
-            }
-            get_M_Point() {
-                if (this.previous) {
-                    let p = this.previous.pointsRy;
-                    this.M_point = [p[p.length - 2], p[p.length - 1]];
-                } else {
-                    this.M_point = [this.pointsRy[0], this.pointsRy[1]];
-                }
-            }
-            get_lastCubicBezier() {
-                let lIdx = this.d.lastIndexOf("C");
-                let temp = this.d.substring(lIdx + 1).split(/[\s,]/).filter(v => v);
-                this.lastCubicBezier = [this.M_point];
-                for (let i = 0; i < temp.length; i += 2) {
-                    this.lastCubicBezier.push([parseFloat(temp[i]), parseFloat(temp[i+1])]);
-                }
-            }
-        }
-
-        function initSubPaths() {
-            subpaths = []; // Clear cũ
-            let d = path.getAttribute("d");
-            let n = d.match(/C/gi).length;
-            let pos = 0;
-            for (let i = 0; i < n; i++) {
-                let newpos = d.indexOf("C", pos + 1);
-                subpaths.push(new subPath(i < n - 1 ? d.substring(0, newpos) : d));
-                pos = newpos;
-            }
-        }
-
-        function get_T(t, index) {
-            let lenAtT = pathlength * t;
-            if (index > 0) {
-                return (lenAtT - subpaths[index-1].pathLength) / (subpaths[index].pathLength - subpaths[index-1].pathLength);
-            }
-            return lenAtT / subpaths[index].pathLength;
-        }
-
-        function lerp(A, B, t) { return [(B[0]-A[0])*t+A[0], (B[1]-A[1])*t+A[1]]; }
-
-        function getBezierPoints(t, p) {
-            let h = [];
-            for (let i = 1; i < 4; i++) h.push(lerp(p[i-1], p[i], t));
-            h.push(lerp(h[0], h[1], t), lerp(h[1], h[2], t));
-            h.push(lerp(h[3], h[4], t));
-            return [p[0], h[0], h[3], h[5]];
-        }
-
-        function drawCBezier(points, index) {
-            let d = index > 0 ? subpaths[index-1].d : `M${points[0][0]},${points[0][1]} C`;
-            for (let i = 1; i < 4; i++) d += ` ${points[i][0]},${points[i][1]} `;
-            document.getElementById("partialPath").setAttributeNS(null, "d", d);
-        }
-
-        const textLetterP = "chúc anh tuổi 18 thật ý nghĩa đi đường cẩn thận về nhà an toàn anh nhé💗";
+        // --- 5. LOGIC CHUYỂN CẢNH ---
+        const textLetterP = "Hôm nay là ngày 29/03. Xin gửi lời chúc tới người tớ yêu thương nhất. Luôn vui vẻ, luôn hạnh phúc và luôn may mắn trong cuộc sống, ngày càng xinh đẹp. Xin gửi tất cả lời chúc tốt đẹp đến với cậu. Love You💗";
         let indexTextContent = 0;
 
         function startTypingInHeart() {
-            const el = document.getElementById('heart-text');
-            if (el && indexTextContent < textLetterP.length) {
-                el.textContent += textLetterP[indexTextContent++];
+            if (indexTextContent < textLetterP.length) {
+                document.getElementById('heart-text').textContent += textLetterP[indexTextContent++];
                 setTimeout(startTypingInHeart, 50);
             }
         }
@@ -314,18 +236,20 @@
             document.getElementById("rose-t").style.display = "none";
             document.getElementById("theSvg").style.display = "block";
             
-            initSubPaths();
-            let t = 0;
-            function animateHeart() {
-                t += 0.0025;
-                if (t <= 1) {
-                    let idx = subpaths.findIndex(s => s.pathLength >= pathlength * t);
-                    if (idx === -1) idx = subpaths.length - 1;
-                    drawCBezier(getBezierPoints(get_T(t, idx), subpaths[idx].lastCubicBezier), idx);
-                    rid = requestAnimationFrame(animateHeart);
+            // Vẽ viền trái tim (giản lược để chạy nhanh hơn)
+            const path = document.getElementById("shape");
+            const partial = document.getElementById("partialPath");
+            let progress = 0;
+            const draw = () => {
+                progress += 0.005;
+                if (progress <= 1) {
+                    partial.setAttribute("d", path.getAttribute("d"));
+                    partial.style.strokeDasharray = path.getTotalLength();
+                    partial.style.strokeDashoffset = path.getTotalLength() * (1 - progress);
+                    requestAnimationFrame(draw);
                 }
-            }
-            animateHeart();
+            };
+            draw();
 
             setTimeout(startTypingInHeart, 500);
             createFireworks();
@@ -333,25 +257,21 @@
             setInterval(createScrollingImage, 800);
         }
 
-        // --- KHỞI CHẠY HOA HỒNG ---
+        // --- 6. KHỞI CHẠY HOA HỒNG ---
         anime({
             targets: 'path',
             strokeDashoffset: [anime.setDashoffset, 0],
             easing: 'easeInOutCubic',
             duration: 3000,
             complete: function() {
-                // Chỉ chạy hoa hồng nếu KHÔNG có tham số step=wishes
-                const urlParams = new URLSearchParams(window.location.search);
-                if (urlParams.get('step') !== 'wishes') {
-                    document.querySelectorAll('.leafOne, .leafTwo, .leafS1').forEach(el => el.setAttribute("fill", "#9CDD05"));
-                    document.querySelector('.stickLine').setAttribute("fill", "#83AA2E");
-                    document.querySelectorAll('.rose1, .rose3').forEach(el => el.setAttribute("fill", "#F37D79"));
-                    document.querySelectorAll('.rose2, .rose4').forEach(el => el.setAttribute("fill", "#D86666"));
-                    setTimeout(nextStage, 1000);
-                }
+                // Tô màu sau khi vẽ xong
+                document.querySelectorAll('.leafOne, .leafTwo, .leafS1').forEach(el => el.setAttribute("fill", "#9CDD05"));
+                document.querySelector('.stickLine').setAttribute("fill", "#83AA2E");
+                document.querySelectorAll('.rose1, .rose3').forEach(el => el.setAttribute("fill", "#F37D79"));
+                document.querySelectorAll('.rose2, .rose4').forEach(el => el.setAttribute("fill", "#D86666"));
+                setTimeout(nextStage, 1000);
             }
         });
     </script>
-    <script src="lang.js"></script>
 </body>
 </html>
