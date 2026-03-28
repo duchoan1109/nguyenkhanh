@@ -42,7 +42,7 @@
         }
 
         .svg-container {
-            width: 80%;
+            width: 90%;
             max-width: 600px;
             position: absolute;
             z-index: 10;
@@ -56,8 +56,8 @@
 
         text {
             fill: black; 
-            font-family: consolas;
-            font-size: 9px;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
             font-weight: bold;
         }
 
@@ -94,21 +94,21 @@
             position: absolute;
             object-fit: cover;
             border: 3px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
             animation: scrollLeftToRight linear forwards;
             opacity: 0.9;
             border-radius: 15px;
         }
 
         @keyframes scrollLeftToRight {
-            0% { transform: translateX(-250px) scale(0.5); opacity: 0; }
-            10% { opacity: 1; transform: translateX(-180px) scale(1); }
+            0% { transform: translateX(-300px) scale(0.5); opacity: 0; }
+            10% { opacity: 1; transform: translateX(-150px) scale(1); }
             90% { opacity: 1; transform: translateX(calc(100vw + 50px)) scale(1); }
-            100% { transform: translateX(calc(100vw + 150px)) scale(0.5); opacity: 0; }
+            100% { transform: translateX(calc(100vw + 200px)) scale(0.5); opacity: 0; }
         }
 
         @media (max-width: 768px) {
-            .heart-img-scroll { width: 120px !important; height: 120px !important; }
+            .heart-img-scroll { width: 120px !important; height: 160px !important; }
         }
     </style>
 </head>
@@ -131,21 +131,23 @@
         <path class="rose4" d="M510.726,141.7c-3.917-4.747-39.75-46.26-91.009-41.792c-21.664,2.405-52.653,12.308-77.277,45.856 c-13.392,19.922-16.495,52.272,4.132,72.986c3.371,3.385,7.075,6.243,11.008,8.573c26.325,15.597,61.186,6.961,76.309-20.683 l0.077,0.062c15.307-34.399,34.961-59.933,71.9-56.082C510.802,151.136,513.867,145.507,510.726,141.7z" />
     </svg>
 
-    <svg id="theSvg" class="svg-container" viewBox="-120 -30 240 180">
+    <svg id="theSvg" class="svg-container" viewBox="-150 -150 300 300">
         <defs>
-            <path id="shape" d="M0, 21.054 C0, 21.054 24.618, -15.165 60.750, 8.554 C93.249, 29.888 57.749, 96.888 0, 117.388 C-57.749, 96.888 -93.249, 29.888 -60.750, 8.554 C-24.618, -15.165 -0, 21.054 -0, 21.054z" />
-            <path id="partialPath" />
+            <path id="shape" d="M0, -80 
+                   C 20, -120 100, -120 100, -20 
+                   C 100, 40 0, 120 0, 120 
+                   C 0, 120 -100, 40 -100, -20 
+                   C -100, -120 -20, -120 0, -80z" />
+            <path id="partialPath" fill="none" />
         </defs>
-        <text dy="-2">
-            <textPath style="font-family: fantasy;" xlink:href="#partialPath" startOffset="12">
-                🌹Happy Birthday Day
-                🌹.........................................................................................................................................🌹From
-                With Love 29/3!🌹
+        <text dy="-6">
+            <textPath id="txtPath" xlink:href="#partialPath" startOffset="0">
+                🌹 Happy Birthday Day 🌹 ................................................................................ 🌹 From With Love 29/3! 🌹
             </textPath>
         </text>
-        <foreignObject x="-70" y="20" width="140" height="85">
+        <foreignObject x="-80" y="-40" width="160" height="100">
             <div xmlns="http://www.w3.org/1999/xhtml" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center;">
-                <span id="heart-text" style="color: black; font-size: 8px; font-weight: bold; font-family: 'Dancing Script', cursive; line-height: 1.4; word-wrap: break-word; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);"></span>
+                <span id="heart-text" style="color: black; font-size: 11px; font-weight: bold; font-family: 'Dancing Script', cursive; line-height: 1.5; word-wrap: break-word; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);"></span>
             </div>
         </foreignObject>
     </svg>
@@ -177,7 +179,9 @@
             "e17cdf9b-717a-46a4-b10a-d1ab6cd896cf.jpg", "4d1e62b7-4ae6-4b2a-a3b2-c90b362377f1.jpg",
             "04902444-bb9a-47d9-a25f-9bf194eeb3b3.jpg", "1c0fee8f-73dc-4a2d-acfe-1b6af7e74393.jpg",
             "a1b6f57c-f88b-4f5e-821c-150baea967a1.jpg", "bd4b2b39-d6c8-437e-83ce-585f9cad8a71.jpg",
-            "32ecf8fd-bb46-49b1-ac59-ab3f8feb24aa.jpg", "nogn.jpg", "gaixenh.jpg"
+            "32ecf8fd-bb46-49b1-ac59-ab3f8feb24aa.jpg", "nogn.jpg", "gaixenh.jpg",
+            "38ef3d39-7d64-456a-a1a1-92b22e192120.jpg", "edd23532-0e2f-4913-b9e4-4f730e5a5117.jpg",
+            "23f93129-87da-4145-a7cd-36d5cd9ba3a1.jpg", "2cbbd109-8eaa-47a6-8534-349b7b2f482c.jpg"
         ];
 
         function createFireworks() {
@@ -203,7 +207,7 @@
             img.src = heartImages[Math.floor(Math.random() * heartImages.length)];
             img.className = 'heart-img-scroll';
             img.style.top = (Math.random() * 80) + 'vh';
-            const duration = 6 + Math.random() * 4;
+            const duration = 7 + Math.random() * 5;
             img.style.animationDuration = duration + 's';
             const size = 150 + Math.random() * 100;
             img.style.width = size + 'px';
@@ -228,15 +232,19 @@
             document.getElementById("rose-t").style.display = "none";
             document.getElementById("theSvg").style.display = "block";
             
-            // ÉP HIỆN NGUYÊN TRÁI TIM NGAY LẬP TỨC
+            // Hiện nguyên hình trái tim chuẩn xác
             const path = document.getElementById("shape");
             const partial = document.getElementById("partialPath");
-            partial.setAttribute("d", path.getAttribute("d")); // Hiện đầy đủ hình dáng trái tim
+            partial.setAttribute("d", path.getAttribute("d"));
             
-            setTimeout(startTypingInHeart, 500);
+            // Khởi động gõ chữ
+            document.getElementById('heart-text').textContent = "";
+            indexTextContent = 0;
+            startTypingInHeart();
+
             createFireworks();
             setInterval(createFireworks, 6000);
-            setInterval(createScrollingImage, 800);
+            setInterval(createScrollingImage, 1000);
         }
 
         if (params.get('step') !== 'wishes') {
